@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.kamikadze328.multitouch">
+    package="com.kamikadze328.whoisfirst">
 
     <application
         android:allowBackup="true"
@@ -12,13 +12,22 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.kamikadze328.whoisfirst.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+        android:name="com.kamikadze328.whoisfirst.activities.MultiTouchActivity"
+        android:label="@string/app_name"
+        android:parentActivityName="com.kamikadze328.whoisfirst.activities.MainActivity"
+        tools:targetApi="jelly_bean">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.kamikadze328.whoisfirst.activities.MainActivity" />
+    </activity>
     </application>
 
 </manifest>

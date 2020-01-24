@@ -1,5 +1,12 @@
 <resources>
-    <string name="app_name">Multitouch</string>
-    <string name="textInMainView">Коснитесь одновременно экрана и приложение выберет первого</string>
+    <string name="app_name">Who Is First</string>
+    <string name="helloInitText">Коснитесь одновременно экрана и приложение выберет первого или очередь</string>
     <string name="start">start</string>
+    <string name="WhoIsFirst">Who is First?</string>
+    <string name="Sequence">Sequence</string>
+    <string name="helloTextView">There is may be your logo</string>
+    <string name="currentAttempt">Current attempt =\u0020</string>
+    <string name="totalAttempt">Current touches =\u0020</string>
+    <string name="helpWhoIsFirst" >Коснитесь одновременно экрана и приложение выберет первого</string>
+    <string name="helpSequence">Очередь</string>
 </resources>
