@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Multitouch</string>
+    <string name="textInMainView">Коснитесь одновременно экрана и приложение выберет первого</string>
+    <string name="start">start</string>
+</resources>

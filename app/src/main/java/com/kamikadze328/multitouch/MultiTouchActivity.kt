@@ -1,0 +1,3 @@
+package com.kamikadze328.multitouch
+
+class MultiTouchActivity
