@@ -8,37 +8,43 @@
 
     <Button
         android:id="@+id/startWhoIsFirstButton"
-        style="@android:style/Widget.Button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:onClick="startWhoIsFirst"
         android:text="@string/WhoIsFirst"
-        android:textColor="#01579B"
-        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
         android:textStyle="bold"
+        android:textAllCaps="false"
+        android:background="@drawable/custom_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <Button
         android:id="@+id/startSequenceButton"
-        style="@android:style/Widget.Button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:onClick="startSequence"
         android:text="@string/Sequence"
-        android:textColor="#01579B"
-        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
         android:textStyle="bold"
+        android:textAllCaps="false"
+        android:background="@drawable/custom_button"
         app:layout_constraintBottom_toTopOf="@+id/startWhoIsFirstButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <ScrollView
         android:id="@+id/scrollView"
