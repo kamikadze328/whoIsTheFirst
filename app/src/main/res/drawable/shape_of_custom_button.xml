@@ -4,7 +4,7 @@
 <!--
     <stroke android:color="@color/customButton" android:width="1dp"/>
 -->
-    <solid android:color="@android:color/holo_purple" />
-    <corners android:radius="15dp"/>
+    <solid android:color="@color/colorDarkPurple" />
+    <corners android:radius="25dp"/>
 
 </shape>

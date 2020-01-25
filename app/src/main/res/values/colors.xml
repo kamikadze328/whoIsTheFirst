@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#1e1e1e</color>
+    <color name="colorPrimaryDark">#121212</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorBlack">#000000</color>
+    <color name="colorBackgroundForText">#1e1e1e</color>
+    <color name="colorDarkPurple">#1f1a24</color>
+
+    <color name="colorButton">#99BB86FC</color>
+    <color name="colorTextLabelApp">#B87FFF</color>
+
+    <color name="colorTextOnDark">#e0e0e0</color>
+    <color name="colorText">#a5a5a5</color>
 </resources>

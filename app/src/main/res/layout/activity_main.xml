@@ -6,46 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <Button
-        android:id="@+id/startWhoIsFirstButton"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="startWhoIsFirst"
-        android:text="@string/WhoIsFirst"
-        android:textColor="@android:color/white"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:textAllCaps="false"
-        android:background="@drawable/custom_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
-    <Button
-        android:id="@+id/startSequenceButton"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="startSequence"
-        android:text="@string/Sequence"
-        android:textColor="@android:color/white"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:textAllCaps="false"
-        android:background="@drawable/custom_button"
-        app:layout_constraintBottom_toTopOf="@+id/startWhoIsFirstButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -64,57 +24,33 @@
                 android:id="@+id/helloInitial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="@string/helloTextView"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                android:textColor="#9B2B08"
-                android:gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/headTextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/colorTextOnDark"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/currentAttemptTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="#303030"
-                android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@+id/currentTouchesMainTextView"
-                app:layout_constraintTop_toBottomOf="@+id/currentTouchesMainTextView" />
-
-            <TextView
-                android:id="@+id/currentTouchesTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="#303030"
-                android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@+id/currentTouchesMainTextView"
-                app:layout_constraintTop_toBottomOf="@+id/initialMessage" />
-
-
 
             <TextView
                 android:id="@+id/initialMessage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_for_text"
                 android:hapticFeedbackEnabled="false"
-                android:text="@string/helloInitText"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:text="@string/mainTextView"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="#000000"
+                android:textColor="@color/colorText"
                 android:textSize="24sp"
-                android:textStyle="bold|italic"
-                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -126,19 +62,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/totalAttempt"
-                android:textColor="#303030"
+                android:textColor="@color/colorTextOnDark"
                 android:textSize="24sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/initialMessage" />
 
             <TextView
-                android:id="@+id/currentTouches"
+                android:id="@+id/currentTouchesTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:textColor="@color/colorTextOnDark"
                 android:textSize="24sp"
                 app:layout_constraintStart_toEndOf="@+id/currentTouchesMainTextView"
                 app:layout_constraintTop_toBottomOf="@+id/initialMessage" />
@@ -149,24 +85,58 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/currentAttempt"
-                android:textColor="#303030"
+                android:textColor="@color/colorTextOnDark"
                 android:textSize="24sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/currentTouchesMainTextView"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/currentTouchesMainTextView" />
+
             <TextView
-                android:id="@+id/currentAttempt"
+                android:id="@+id/currentAttemptTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:textColor="@color/colorTextOnDark"
                 android:textSize="24sp"
                 app:layout_constraintStart_toEndOf="@+id/currentAttemptMainTextView"
                 app:layout_constraintTop_toBottomOf="@+id/currentTouchesMainTextView" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+    <Button
+        android:id="@+id/startSequenceButton"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="startSequence"
+        android:text="@string/sequence"
+        android:textColor="@color/colorTextOnDark"
+        android:textSize="25sp"
+        android:textAllCaps="false"
+        android:background="@drawable/custom_button"
+        app:layout_constraintBottom_toTopOf="@+id/startWhoIsFirstButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <Button
+        android:id="@+id/startWhoIsFirstButton"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="startWhoIsFirst"
+        android:text="@string/whoIsFirst"
+        android:textColor="@color/colorTextOnDark"
+        android:textSize="25sp"
+        android:textAllCaps="false"
+        android:background="@drawable/custom_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
