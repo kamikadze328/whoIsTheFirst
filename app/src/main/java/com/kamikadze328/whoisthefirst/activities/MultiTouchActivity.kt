@@ -1,15 +1,16 @@
-package com.kamikadze328.whoisfirst.activities
+package com.kamikadze328.whoisthefirst.activities
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
-import com.kamikadze328.whoisfirst.R
+import com.kamikadze328.whoisthefirst.R
+import kotlinx.android.synthetic.main.activity_multi_touch.*
 
 
 class MultiTouchActivity:Activity(){
-
-    private lateinit var helpTextView: TextView
+    companion object{
+        var mode = ""
+    }
     private var currentTouches = 0
     private var currentAttempt =0
 
@@ -17,11 +18,10 @@ class MultiTouchActivity:Activity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_multi_touch)
-        helpTextView = findViewById(R.id.helpTextView)
-
-        when(intent.getStringExtra("mode")){
+        mode = intent.getStringExtra("mode")?:""
+        when(mode){
             "1"   ->   helpTextView.text = getString(R.string.helpWhoIsFirst)
-            "123" ->   helpTextView.text = getString(R.string.helpSequence)
+            "123" ->   helpTextView.text = getString(R.string.helpQueue)
         }
 
         if (savedInstanceState != null) {

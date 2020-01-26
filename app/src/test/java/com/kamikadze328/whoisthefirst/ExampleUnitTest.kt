@@ -1,4 +1,4 @@
-package com.kamikadze328.whoisfirst
+package com.kamikadze328.whoisthefirst
 
 import org.junit.Test
 

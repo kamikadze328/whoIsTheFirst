@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/sequenceButton"
+        app:layout_constraintBottom_toTopOf="@+id/queueButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,13 +67,13 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.4dp"
-                    android:background="@color/colorDivider"
-                    android:padding="2dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_marginEnd="10dp"
+                    android:background="@android:color/white"
+                    android:padding="2dp" />
 
                 <TextView
-                    android:id="@+id/descriptionSequence"
+                    android:id="@+id/descriptionQueue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -81,10 +81,11 @@
                     android:paddingTop="6dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="6dp"
-                    android:text="@string/helpSequence"
+                    android:text="@string/helpQueue"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/colorText"
-                    android:textSize="24sp" />
+                    android:textColor="@color/colorTextNew"
+                    android:textSize="24sp"
+                    android:fontFamily=""/>
             </LinearLayout>
 
             <TextView
@@ -134,45 +135,46 @@
                 app:layout_constraintTop_toBottomOf="@+id/currentTouchesMainTextView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
     <Button
         android:id="@+id/whoIsFirstButton"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:onClick="startWhoIsFirst"
-        android:text="@string/whoIsFirst"
-        android:textColor="@color/colorTextOnDark"
-        android:textSize="25sp"
-        android:textAllCaps="false"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/custom_button"
         android:drawableEnd="@drawable/icon_who_is_first_button"
+        android:onClick="startWhoIsFirst"
         android:padding="10dp"
+        android:text="@string/whoIsFirst"
+        android:textAllCaps="false"
+        android:textColor="@color/colorTextOnDark"
+        android:textSize="25sp"
 
-        app:layout_constraintBottom_toTopOf="@+id/sequenceButton"
+        app:layout_constraintBottom_toTopOf="@+id/queueButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/sequenceButton"
+        android:id="@+id/queueButton"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:padding="10dp"
-        android:onClick="startSequence"
-        android:text="@string/sequence"
-        android:textColor="@color/colorTextOnDark"
-        android:textSize="25sp"
-        android:textAllCaps="false"
         android:background="@drawable/custom_button"
         android:drawableEnd="@drawable/icon_sequence_button_24dp"
+        android:onClick="startSequence"
+        android:padding="10dp"
+        android:text="@string/queue"
+        android:textAllCaps="false"
+        android:textColor="@color/colorTextOnDark"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

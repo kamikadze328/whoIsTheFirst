@@ -1,4 +1,4 @@
-package com.kamikadze328.whoisfirst
+package com.kamikadze328.whoisthefirst
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

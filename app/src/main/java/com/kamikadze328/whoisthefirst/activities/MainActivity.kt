@@ -1,11 +1,11 @@
-package com.kamikadze328.whoisfirst.activities
+package com.kamikadze328.whoisthefirst.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.kamikadze328.whoisfirst.R
+import com.kamikadze328.whoisthefirst.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -15,9 +15,6 @@ class MainActivity : AppCompatActivity() {
         const val currentAttemptKey = "current_attempt"
     }
 
-    private lateinit var currentTouches: TextView
-    private lateinit var currentAttempt: TextView
-
     private val resultRequest = 1
     private val extrasWhoIsFirst = "1"
     private val extrasSequence = "123"
@@ -26,17 +23,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        currentTouches = findViewById(R.id.currentTouchesTextView)
-        currentAttempt = findViewById(R.id.currentAttemptTextView)
 
         // If the last instance was saved then just restore the textViews.
         // Else set the initial value for current and start new thread to get from the db the total max ever.
         if (savedInstanceState != null) {
-            currentTouches.text = savedInstanceState.getString(currentTouchesKey)
-            currentAttempt.text = savedInstanceState.getString(currentAttemptKey)
+            currentTouchesTextView.text = savedInstanceState.getString(currentTouchesKey)
+            currentAttemptTextView.text = savedInstanceState.getString(currentAttemptKey)
         } else {
-            currentAttempt.text = "0"
-            currentTouches.text = "0"
+            currentAttemptTextView.text = "0"
+            currentTouchesTextView.text = "0"
             //GetTotalMaxAsyncTask(applicationContext, this.totalAttempt).execute()
         }
     }
@@ -58,15 +53,15 @@ class MainActivity : AppCompatActivity() {
         val resultTouches = data?.getIntExtra(currentTouchesKey, 0) ?:0
         if (requestCode == resultRequest) {
             if (resultCode == RESULT_OK) {
-                currentTouches.text = resultTouches.toString()
-                currentAttempt.text = (currentAttempt.text.toString().toInt() + 1).toString()
+                currentTouchesTextView.text = resultTouches.toString()
+                currentAttemptTextView.text = (currentAttemptTextView.text.toString().toInt() + 1).toString()
             }
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putString(currentTouchesKey, currentTouches.text.toString())
-        outState.putString(currentAttemptKey, currentAttempt.text.toString())
+        outState.putString(currentTouchesKey, currentTouchesTextView.text.toString())
+        outState.putString(currentAttemptKey, currentAttemptTextView.text.toString())
         super.onSaveInstanceState(outState)
     }
 }

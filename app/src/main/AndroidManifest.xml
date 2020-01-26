@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.kamikadze328.whoisfirst">
+    package="com.kamikadze328.whoisthefirst">
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,7 @@
         android:screenOrientation="portrait"
         tools:ignore="GoogleAppIndexingWarning"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name="com.kamikadze328.whoisfirst.activities.MainActivity"
+        <activity android:name="com.kamikadze328.whoisthefirst.activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,15 +22,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.kamikadze328.whoisfirst.activities.MultiTouchActivity"
+            android:name="com.kamikadze328.whoisthefirst.activities.MultiTouchActivity"
             android:label="@string/app_name"
-            android:parentActivityName="com.kamikadze328.whoisfirst.activities.MainActivity"
+            android:parentActivityName="com.kamikadze328.whoisthefirst.activities.MainActivity"
             tools:targetApi="jelly_bean"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.kamikadze328.whoisfirst.activities.MainActivity" />
+            android:value="com.kamikadze328.whoisthefirst.activities.MainActivity" />
     </activity>
     </application>
 
