@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Who Is First?</string>
+    <string name="currentAttempt">Всего попыток =\\u0020</string>
+    <string name="headTextView">Описание</string>
+    <string name="helpQueue">Описание правил очереди</string>
+    <string name="helpWhoIsFirst">Коснитесь одновременно экрана и приложение выберет одного</string>
+    <string name="queue">Очередь</string>
+    <string name="totalAttempt">Всего касаний =\\u0020</string>
+    <string name="whoIsFirst">Кто первый?</string>
+    <string name="youAreOnlyTheFirst">Вы и так первый!</string>
+</resources>
