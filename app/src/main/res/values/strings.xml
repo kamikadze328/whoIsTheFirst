@@ -8,4 +8,5 @@
     <string name="helpWhoIsFirst" >Коснитесь одновременно экрана и приложение выберет одного</string>
     <string name="helpQueue">Description of queue</string>
     <string name="youAreOnlyTheFirst">Вы и так первый!</string>
+    <string name="helpStartAgain">Уберите палец, чтобы начать ещё раз</string>
 </resources>

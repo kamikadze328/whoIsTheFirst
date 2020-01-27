@@ -9,4 +9,5 @@
     <string name="totalAttempt">Всего касаний =\\u0020</string>
     <string name="whoIsFirst">Кто первый?</string>
     <string name="youAreOnlyTheFirst">Вы и так первый!</string>
+    <string name="helpStartAgain">Уберите палец, чтобы начать ещё раз</string>
 </resources>

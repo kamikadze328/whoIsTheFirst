@@ -11,7 +11,6 @@ class CustomCountDownTimer(millisInFuture: Long, countDownInterval: Long, var te
         if(time.length<=3) time = time.plus(0)
         textView.textSize = width / 27f
         textView.text = time
-        Log.d("KEK", time)
     }
 
     override fun onFinish() {
