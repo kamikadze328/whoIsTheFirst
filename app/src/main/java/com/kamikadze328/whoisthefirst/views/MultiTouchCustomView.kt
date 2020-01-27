@@ -5,7 +5,6 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
@@ -21,13 +20,19 @@ import java.util.concurrent.TimeUnit
 
 
 class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(context, attributeSet) {
-    val COLORS = intArrayOf(
-        Color.RED,
-        Color.BLUE,
-        Color.GREEN,
-        Color.YELLOW,
-        Color.CYAN
+    private val colors: MutableList<Int> = mutableListOf(
+        ContextCompat.getColor(context, R.color.colorCircleRed),
+        ContextCompat.getColor(context, R.color.colorCirclePink),
+        ContextCompat.getColor(context, R.color.colorCirclePurple),
+        ContextCompat.getColor(context, R.color.colorCircleBlue),
+        ContextCompat.getColor(context, R.color.colorCircleLightBlue),
+        ContextCompat.getColor(context, R.color.colorCircleMint),
+        ContextCompat.getColor(context, R.color.colorCircleAppleGreen),
+        ContextCompat.getColor(context, R.color.colorCircleYellow),
+        ContextCompat.getColor(context, R.color.colorCircleOrange),
+        ContextCompat.getColor(context, R.color.colorCircleWhite)
     )
+
     private val activity: MultiTouchActivity = context as MultiTouchActivity
 
     private var scheduledService: ScheduledExecutorService =
@@ -44,8 +49,11 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
     private var winnerID: Int = -1
     private var winnerIndex: Int = -1
 
-
-
+    init{
+        colors.shuffle()
+        colors.shuffle()
+        colors.shuffle()
+    }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -75,26 +83,23 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
     }
     private fun drawCircle(canvas: Canvas, i:Int){
         val current = coordinates[i]
-        val x: Float = current.x
-        val y: Float = current.y
-        val id: Int = current.id
-        paint.color = COLORS[id % 5]
+        val x = current.x
+        val y = current.y
+        val id = current.id
+        val color = colors[id % colors.size]
 
-        // Set the width of the circle.
-        paint.strokeWidth = width / 40f
+        paint.color = color
+        paint.strokeWidth = width / 50f
         paint.style = Paint.Style.STROKE
         paint.isAntiAlias = true
-        // Set the width of the lines.
-
+        paint.setShadowLayer(width / 25f, 0f, 0f, color)
         canvas.drawCircle(x, y, width / 7.7f, paint)
-        // Draw the number of the specific circle next to it in white colour.
-        paint.color = Color.WHITE
+
+        /*paint.color = Color.WHITE
         paint.strokeWidth = 5f
         paint.style = Paint.Style.FILL
-        // Set the size for the numbers.
-        // Set the size for the numbers.
         paint.textSize = 75f
-        canvas.drawText((id).toString(), x + 110, y, paint)
+        canvas.drawText((id).toString(), x + 110, y, paint)*/
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -107,7 +112,6 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
             if(winnerIndex<0 || !isTimerSuccessEnded) {
                 coordinates.add(Pointer(event.getX(i), event.getY(i), event.getPointerId(i)))
             } else if(winnerID>=0 && winnerID==event.getPointerId(i)){
-                Log.d("KEK", "winnerID($winnerID)>=0")
                 coordinates.clear()
                 coordinates.add(Pointer(event.getX(i), event.getY(i), winnerID))
                 break
@@ -115,7 +119,6 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
                 winnerID = event.getPointerId(winnerIndex)
                 coordinates.clear()
                 coordinates.add(Pointer(event.getX(i), event.getY(i), winnerID))
-                Log.d("EVENT", "Нашёлся победитель id ---- $winnerID")
                 break
             }
 
@@ -142,7 +145,6 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
         if (countTouches == 1) {
             future = scheduledService.schedule(
                 {
-                    Log.d("TIMEKEK", "расчёт окончен!")
                     areYouAlone = true
                 },
                 1600,
@@ -152,10 +154,8 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
 
             future = scheduledService.schedule(
                 {
-                    Log.d("TIMEKEK", "расчёт окончен!")
                     isTimerSuccessEnded = true
                     winnerIndex = getOneRandomPointer()
-                    Log.d("WINNERINDEX", "$winnerIndex")
                 },
                 2,
                 TimeUnit.SECONDS
@@ -200,7 +200,9 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
     }
 
     private fun getOneRandomPointer(): Int = (0 until lastPointersCount).random()
+
     private fun ahShitHereWeGoAgain() {
+        colors.shuffle()
         winnerIndex = -1
         winnerID = -1
         isTimerSuccessEnded = false

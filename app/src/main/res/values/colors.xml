@@ -13,4 +13,15 @@
     <color name="colorText">#a5a5a5</color>
     <color name="colorTextNew">#C7C7C7</color>
 
+    <color name="colorCircleRed">#ff2805</color>
+    <color name="colorCirclePink">#e628e2</color>
+    <color name="colorCirclePurple">#8f00ba</color>
+    <color name="colorCircleBlue">#3633ff</color>
+    <color name="colorCircleLightBlue">#3da8cc</color>
+    <color name="colorCircleMint">#89ffde</color>
+    <color name="colorCircleAppleGreen">#7fe601</color>
+    <color name="colorCircleYellow">#e6fc00</color>
+    <color name="colorCircleOrange">#ff8300</color>
+    <color name="colorCircleWhite">#ffffff</color>
+
 </resources>
