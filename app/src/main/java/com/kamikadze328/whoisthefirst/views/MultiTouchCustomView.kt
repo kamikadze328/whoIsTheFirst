@@ -2,7 +2,6 @@ package com.kamikadze328.whoisthefirst.views
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.MotionEvent

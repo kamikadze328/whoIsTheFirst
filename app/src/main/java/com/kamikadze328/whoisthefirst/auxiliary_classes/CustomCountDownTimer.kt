@@ -1,7 +1,6 @@
 package com.kamikadze328.whoisthefirst.auxiliary_classes
 
 import android.os.CountDownTimer
-import android.util.Log
 import android.widget.TextView
 import kotlin.math.roundToInt
 
