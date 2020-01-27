@@ -3,6 +3,7 @@ package com.kamikadze328.whoisthefirst.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.kamikadze328.whoisthefirst.R
 import kotlinx.android.synthetic.main.activity_multi_touch.*
 
@@ -10,9 +11,11 @@ import kotlinx.android.synthetic.main.activity_multi_touch.*
 class MultiTouchActivity:Activity(){
     companion object{
         var mode = ""
+        var currentTouches = 0
     }
-    private var currentTouches = 0
-    private var currentAttempt =0
+    private var currentAttempt = 0
+    private var localCurrentTouches = 0
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,19 +32,17 @@ class MultiTouchActivity:Activity(){
             currentAttempt = savedInstanceState.getString(MainActivity.currentAttemptKey) ?.toInt() ?: 0
 
         } else {
-            currentTouches = 0
-            //GetTotalTouchesAsyncTask(applicationContext, totalCount).execute()
+            currentTouches = localCurrentTouches
+            Log.d("MultiACTIVITYNULL", "$currentTouches")
         }
     }
 
 
     override fun onBackPressed() {
         val output = Intent()
-        output.putExtra(
-            MainActivity.currentTouchesKey,
-            currentTouches
-        )
+        output.putExtra(MainActivity.currentTouchesKey, currentTouches)
         output.putExtra(MainActivity.currentAttemptKey, currentAttempt+1)
+
         setResult(RESULT_OK, output)
         finish()
         super.onBackPressed()

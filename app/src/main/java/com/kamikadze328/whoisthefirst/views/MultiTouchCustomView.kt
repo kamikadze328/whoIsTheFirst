@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
@@ -12,11 +13,12 @@ import com.kamikadze328.whoisthefirst.R
 import com.kamikadze328.whoisthefirst.activities.MultiTouchActivity
 import com.kamikadze328.whoisthefirst.auxiliary_classes.CustomCountDownTimer
 import com.kamikadze328.whoisthefirst.auxiliary_classes.Pointer
+import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
-
+import kotlin.collections.ArrayList
 
 class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(context, attributeSet) {
     private val colors: MutableList<Int> = mutableListOf(
@@ -126,7 +128,10 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
         if (lastPointersCount != pointerCount) {
             areYouAlone = false
             if(!isTimerSuccessEnded) startScheduleToRandom(pointerCount)
+            if(lastPointersCount<pointerCount ) {MultiTouchActivity.currentTouches++
+            Log.d("TOUCHES", "${MultiTouchActivity.currentTouches}")}
         }
+
         lastPointersCount = pointerCount
 
         this.invalidate()
@@ -146,20 +151,20 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
                 {
                     areYouAlone = true
                 },
-                1600,
+                2000,
                 TimeUnit.MILLISECONDS
             )
         } else {
-
+            val milliSeconds:Long = 1200
             future = scheduledService.schedule(
                 {
                     isTimerSuccessEnded = true
                     winnerIndex = getOneRandomPointer()
                 },
-                2,
-                TimeUnit.SECONDS
+                milliSeconds,
+                TimeUnit.MILLISECONDS
             )
-            startTextTimer()
+            startTextTimer(milliSeconds)
         }
     }
 
@@ -173,9 +178,9 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
         }
     }
 
-    private fun startTextTimer() {
+    private fun startTextTimer(milliSeconds:Long) {
         textTimer = CustomCountDownTimer(
-            2000, 10, activity.findViewById(R.id.helpTextView), width
+            milliSeconds, 10, activity.findViewById(R.id.helpTextView), width
         )
             .start() as CustomCountDownTimer
     }
@@ -184,12 +189,14 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
         val helpTextView = activity.findViewById<TextView>(R.id.helpTextView)
         if (lastPointersCount == 0 || (lastPointersCount == 1 && !areYouAlone)) {
             helpTextView.textSize = width / 54f
+            var helpText = resources.getString(R.string.helpText)
+            helpText = helpText.substring(0, helpText.length-1) + " "
             when (MultiTouchActivity.mode) {
                 "1" -> {
                     helpTextView.text = if(isTimerSuccessEnded) resources.getString(R.string.helpStartAgain)
-                    else resources.getString(R.string.helpWhoIsFirst)
+                    else (helpText + resources.getString(R.string.helpWhoIsFirst).toLowerCase(Locale.getDefault()))
                 }
-                "123" -> helpTextView.text = resources.getString(R.string.helpQueue)
+                "123" -> helpTextView.text = (helpText + resources.getString(R.string.helpQueue).toLowerCase(Locale.getDefault()))
             }
         } else if (lastPointersCount == 1 && areYouAlone) {
             helpTextView.textSize = width / 54f

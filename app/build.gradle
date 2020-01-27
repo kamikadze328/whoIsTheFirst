@@ -11,8 +11,8 @@ android {
         applicationId "com.kamikadze328.whoisthefirst"
         minSdkVersion 22
         targetSdkVersion 29
-        versionCode 10
-        versionName "0.10"
+        versionCode 15
+        versionName "0.15"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

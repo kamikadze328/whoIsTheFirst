@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">Who Is The First?</string>
-    <string name="whoIsFirst">Who is The First?</string>
+    <string name="whoIsFirst">Who Is The First</string>
     <string name="queue">Queue</string>
-    <string name="headTextView">Description</string>
     <string name="currentAttempt">Current attempt =\u0020</string>
     <string name="totalAttempt">Current touches =\u0020</string>
-    <string name="helpWhoIsFirst" >Коснитесь одновременно экрана и приложение выберет одного</string>
-    <string name="helpQueue">Description of queue</string>
-    <string name="youAreOnlyTheFirst">Вы и так первый!</string>
-    <string name="helpStartAgain">Уберите палец, чтобы начать ещё раз</string>
+    <string name="helpText">Simultaneously touch the screen and app will:</string>
+    <string name="helpWhoIsFirst" >Randomly choose one of you</string>
+    <string name="helpQueue">Generate you a random queue</string>
+    <string name="youAreOnlyTheFirst">You are the One!</string>
+    <string name="helpStartAgain">Remove the finger from the screen to start again</string>
+    <string name="or">or</string>
+    <string name="queueIsNotAvailable">Queue is not available now</string>
 </resources>

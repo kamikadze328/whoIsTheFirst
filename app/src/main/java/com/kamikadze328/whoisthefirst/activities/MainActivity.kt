@@ -2,7 +2,9 @@ package com.kamikadze328.whoisthefirst.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.kamikadze328.whoisthefirst.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,13 +41,20 @@ class MainActivity : AppCompatActivity() {
     fun startWhoIsFirst(view: View) {
         val intent = Intent(this, MultiTouchActivity::class.java)
         intent.putExtra("mode", extrasWhoIsFirst)
+        //intent.putExtra("currentTouches")
         startActivityForResult(intent, resultRequest)
     }
 
-    fun startSequence(view: View) {
-        val intent = Intent(this, MultiTouchActivity::class.java)
+    fun startQueue(view: View) {
+        /*val intent = Intent(this, MultiTouchActivity::class.java)
         intent.putExtra("mode", extrasSequence)
-        startActivityForResult(intent, resultRequest)
+        startActivityForResult(intent, resultRequest)*/
+        val toast = Toast.makeText(
+            applicationContext,
+            resources.getString(R.string.queueIsNotAvailable), Toast.LENGTH_SHORT
+        )
+
+        toast.show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

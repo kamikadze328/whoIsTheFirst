@@ -26,14 +26,17 @@
                 android:id="@+id/helloInitial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="30dp"
-                android:text="@string/headTextView"
+                android:layout_marginTop="36dp"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="7dp"
+                android:text="@string/helpText"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@color/colorTextOnDark"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,33 +61,71 @@
                     android:paddingStart="10dp"
                     android:paddingTop="6dp"
                     android:paddingEnd="10dp"
-                    android:paddingBottom="6dp"
+                    android:gravity="center"
                     android:text="@string/helpWhoIsFirst"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/colorTextNew"
+                    android:textColor="@color/colorText"
                     android:textSize="24sp" />
 
-                <View
+                <LinearLayout
+                    android:id="@+id/dividerLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="0.4dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@android:color/white"
-                    android:padding="2dp" />
+                    android:layout_height="20dp"
+                    android:background="@drawable/background_for_text"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/helloInitial">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_weight="0.43"
+                        android:background="@android:color/white"
+                        android:padding="2dp" />
+
+                    <TextView
+                        android:layout_width="36dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="-6dp"
+                        android:layout_weight="0.045"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="0dp"
+                        android:lineSpacingMultiplier="0"
+                        android:paddingTop="0dp"
+                        android:text="@string/or"
+                        android:textColor="@color/colorText"
+                        android:textSize="24sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="13dp"
+                        android:layout_weight="0.43"
+                        android:background="@android:color/white"
+                        android:padding="2dp" />
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/descriptionQueue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily=""
                     android:paddingStart="10dp"
-                    android:paddingTop="6dp"
                     android:paddingEnd="10dp"
+                    android:gravity="center"
                     android:paddingBottom="6dp"
                     android:text="@string/helpQueue"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/colorTextNew"
+                    android:textColor="@color/colorText"
                     android:textSize="24sp" />
             </LinearLayout>
 
@@ -166,7 +207,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/custom_button"
         android:drawableEnd="@drawable/icon_sequence_button_24dp"
-        android:onClick="startSequence"
+        android:onClick="startQueue"
         android:padding="10dp"
         android:text="@string/queue"
         android:textAllCaps="false"

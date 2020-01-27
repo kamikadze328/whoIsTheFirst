@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1e1e1e</color>
+    <color name="colorPrimary">#241B29</color>
     <color name="colorPrimaryDark">#121212</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorBackgroundForText">#1e1e1e</color>
+    <color name="colorBackgroundForText">#2e2e2e</color>
     <color name="colorDarkPurple">#1f1a24</color>
 
     <color name="colorButton">#8863BB</color>
-    <color name="colorDivider">#66BB86FC</color>
 
-    <color name="colorTextOnDark">#e0e0e0</color>
-    <color name="colorText">#a5a5a5</color>
-    <color name="colorTextNew">#C7C7C7</color>
+    <color name="colorTextOnDark">#f0f0f0</color>
+    <color name="colorText">#e7e7e7</color>
 
     <color name="colorCircleRed">#ff2805</color>
     <color name="colorCirclePink">#e628e2</color>
