@@ -28,24 +28,27 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
         Color.YELLOW,
         Color.CYAN
     )
+    private val activity: MultiTouchActivity = context as MultiTouchActivity
 
     private var scheduledService: ScheduledExecutorService =
         Executors.newSingleThreadScheduledExecutor()
     private var future: ScheduledFuture<*>? = null
+    private var textTimer: CustomCountDownTimer? = null
 
     private var coordinates: ArrayList<Coordinates> = ArrayList()
     private val paint: Paint = Paint()
-    private val activity: MultiTouchActivity = context as MultiTouchActivity
+
     private var lastPointersCount = 0
-    private var textTimer: CustomCountDownTimer? = null
-    var youAreAlone = false
+    private var areYouAlone = false
 
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         if (canvas != null) {
             drawHelpText()
-            if (lastPointersCount != 0) { drawTouches(canvas, coordinates, paint) }
+            if (lastPointersCount != 0) {
+                drawTouches(canvas, coordinates, paint)
+            }
         }
     }
 
@@ -84,7 +87,7 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
         }
 
         if (lastPointersCount != pointerCount) {
-            youAreAlone = false
+            areYouAlone = false
             startScheduleToRandom(pointerCount)
 
             Log.d("TIMEKEK", "( $lastPointersCount -> $pointerCount )")
@@ -96,7 +99,7 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
 
         // If the last touch pointer is removed -> remove its circle.
         if (event.action == MotionEvent.ACTION_UP) {
-            youAreAlone = false
+            areYouAlone = false
             Log.d("TIMEKEK", "( $lastPointersCount -> 0 )")
             try {
                 coordinates.removeAt(0)
@@ -116,7 +119,7 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
             future = scheduledService.schedule(
                 {
                     Log.d("TIMEKEK", "расчёт окончен!")
-                    youAreAlone = true
+                    areYouAlone = true
                 },
                 1600,
                 TimeUnit.MILLISECONDS
@@ -154,13 +157,13 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
 
     private fun drawHelpText() {
         val helpTextView = activity.findViewById<TextView>(R.id.helpTextView)
-        if (lastPointersCount == 0 || (lastPointersCount == 1 && !youAreAlone)) {
+        if (lastPointersCount == 0 || (lastPointersCount == 1 && !areYouAlone)) {
             helpTextView.textSize = width / 54f
             when (MultiTouchActivity.mode) {
                 "1" -> helpTextView.text = resources.getString(R.string.helpWhoIsFirst)
                 "123" -> helpTextView.text = resources.getString(R.string.helpQueue)
             }
-        } else if (lastPointersCount == 1 && youAreAlone) {
+        } else if (lastPointersCount == 1 && areYouAlone) {
             helpTextView.textSize = width / 54f
             helpTextView.text = resources.getString(R.string.youAreOnlyTheFirst)
         }
