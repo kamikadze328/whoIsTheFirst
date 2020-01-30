@@ -73,7 +73,7 @@
                     android:layout_height="20dp"
                     android:background="@drawable/background_for_text"
                     android:orientation="horizontal"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="7dp"
                     android:layout_marginBottom="3dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"

@@ -20,8 +20,8 @@ class MultiTouchActivity:Activity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_multi_touch)
         mode = intent.getStringExtra("mode")?:""
+        setContentView(R.layout.activity_multi_touch)
         when(mode){
             "1"   ->   helpTextView.text = getString(R.string.helpWhoIsFirst)
             "123" ->   helpTextView.text = getString(R.string.helpQueue)

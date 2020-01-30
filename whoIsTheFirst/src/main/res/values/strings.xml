@@ -4,11 +4,13 @@
     <string name="queue">Queue</string>
     <string name="currentAttempt">Current attempt =\u0020</string>
     <string name="totalAttempt">Current touches =\u0020</string>
-    <string name="helpText">Simultaneously touch the screen and app will:</string>
-    <string name="helpWhoIsFirst" >Randomly choose one of you</string>
-    <string name="helpQueue">Generate you a random queue</string>
+    <string name="helpText">All players touch the screen at the same time and wait until the app:</string>
+    <string name="helpWhoIsFirst" >Choose one of you</string>
+    <string name="helpQueue">Generate a queue</string>
     <string name="youAreOnlyTheFirst">You are the One!</string>
     <string name="helpStartAgain">Remove the finger from the screen to start again</string>
     <string name="or">or</string>
     <string name="queueIsNotAvailable">Queue is not available now</string>
+    <string name="youWin">You win!</string>
+    <string name="helpStartAgainQueue">Double tap to start again</string>
 </resources>

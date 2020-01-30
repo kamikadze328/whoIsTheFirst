@@ -3,8 +3,11 @@ package com.kamikadze328.whoisthefirst.views
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.Log
+import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
@@ -19,6 +22,7 @@ import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
+
 
 class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(context, attributeSet) {
     private val colors: MutableList<Int> = mutableListOf(
@@ -38,22 +42,38 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
 
     private var scheduledService: ScheduledExecutorService =
         Executors.newSingleThreadScheduledExecutor()
-    private var future: ScheduledFuture<*>? = null
+    private var futureTask: ScheduledFuture<*>? = null
     private var textTimer: CustomCountDownTimer? = null
 
     private var coordinates: ArrayList<Pointer> = ArrayList()
+
     private val paint: Paint = Paint()
 
-    private var lastPointersCount = 0
     private var areYouAlone = false
     private var isTimerSuccessEnded = false
+    private var lastPointersCount = 0
     private var winnerID: Int = -1
-    private var winnerIndex: Int = -1
 
-    init{
+    private val milliSecondsForTimer: Long = 1000
+    private val milliSecondsForOne: Long = 2500
+    private var radiusCircle = 0f
+
+    private val mode = MultiTouchActivity.mode
+
+    init {
         colors.shuffle()
         colors.shuffle()
         colors.shuffle()
+        val gestureDetector = GestureDetector(activity, object : GestureDetector.SimpleOnGestureListener() {
+            override fun onDoubleTap(e: MotionEvent?): Boolean {
+                return if(isTimerSuccessEnded && mode=="123"){
+                    Log.d("KEk","$e.action")
+                    ahShitHereWeGoAgain()
+                    true
+                } else false
+            }
+        })
+        this.setOnTouchListener { _, event -> gestureDetector.onTouchEvent(event) }
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -66,27 +86,21 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
         }
     }
 
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        radiusCircle = width / 7.7f
+    }
+
     private fun drawTouches(
         canvas: Canvas,
-        coordinates: List<Pointer>
+        coordinates: MutableList<Pointer>
     ) {
         canvas.drawColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
-
-        for (i in coordinates.indices) {
-            if(winnerID<0) {
-                drawCircle(canvas, i)
-            }
-            else if (coordinates[i].id == winnerID){
-                drawCircle(canvas, i)
-                break
-            }
-        }
+        if (!isTimerSuccessEnded || mode == "1") coordinates.forEach { drawCircle(canvas, it.x, it.y, it.id) }
+        else coordinates.forEach { drawOneFromQueue(canvas, it) }
     }
-    private fun drawCircle(canvas: Canvas, i:Int){
-        val current = coordinates[i]
-        val x = current.x
-        val y = current.y
-        val id = current.id
+
+    private fun drawCircle(canvas: Canvas, x: Float, y:Float, id:Int) {
         val color = colors[id % colors.size]
 
         paint.color = color
@@ -94,45 +108,75 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
         paint.style = Paint.Style.STROKE
         paint.isAntiAlias = true
         paint.setShadowLayer(width / 25f, 0f, 0f, color)
-        canvas.drawCircle(x, y, width / 7.7f, paint)
+        canvas.drawCircle(x, y, radiusCircle, paint)
+    }
 
-        /*paint.color = Color.WHITE
-        paint.strokeWidth = 5f
+    private fun drawOneFromQueue(canvas: Canvas, current: Pointer) {
+        val x = current.x
+        val y = current.y
+        val placeInLine = (current.placeInLine + 1).toString()
+
+        drawCircle(canvas, x, y, current.id)
+
+        //A Number in a Circle
+        paint.strokeWidth = width / 150f
+        paint.textSize = width / 15f
+        val vOffset = - width / 50f
+
+        val path = Path()
+        path.addCircle(x, y, radiusCircle, Path.Direction.CW)
+        paint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
         paint.style = Paint.Style.FILL
-        paint.textSize = 75f
-        canvas.drawText((id).toString(), x + 110, y, paint)*/
+        paint.textAlign = Paint.Align.CENTER
+        paint.setShadowLayer(0f, 0f, 0f, 0)
+
+        canvas.drawTextOnPath(placeInLine, path, 0f, vOffset, paint)
+        canvas.drawTextOnPath(placeInLine, path, (radiusCircle * 2 * Math.PI.toFloat()) * 1 / 4, vOffset, paint)
+        canvas.drawTextOnPath(placeInLine, path, (radiusCircle * 2 * Math.PI.toFloat()) * 2 / 4, vOffset, paint)
+        canvas.drawTextOnPath(placeInLine, path, (radiusCircle * 2 * Math.PI.toFloat()) * (-1) / 4, vOffset, paint)
+
+
+        //Numbers around a Circle
+        paint.textSize = width / 6f
+        canvas.drawText(placeInLine, x, y+width / 20f, paint)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         super.onTouchEvent(event)
-
+        if (mode=="123" && isTimerSuccessEnded) {
+            return true
+        }
         coordinates = ArrayList()
         val pointerCount = event.pointerCount
         // For each of the pointers of touches -> Put their coordinates to draw them in onDraw().
         for (i in 0 until pointerCount) {
-            if(winnerIndex<0 || !isTimerSuccessEnded) {
-                coordinates.add(Pointer(event.getX(i), event.getY(i), event.getPointerId(i)))
-            } else if(winnerID>=0 && winnerID==event.getPointerId(i)){
-                coordinates.clear()
-                coordinates.add(Pointer(event.getX(i), event.getY(i), winnerID))
-                break
-            } else if (i == winnerIndex) {
-                winnerID = event.getPointerId(winnerIndex)
-                coordinates.clear()
-                coordinates.add(Pointer(event.getX(i), event.getY(i), winnerID))
+
+            if (!isTimerSuccessEnded) {
+                coordinates.add(Pointer(event.getX(i), event.getY(i), event.getPointerId(i), 0))
+
+            } else if (mode=="1") {
+                if (winnerID != event.getPointerId(i)) continue
+                coordinates.add(Pointer(event.getX(i), event.getY(i), winnerID, 0))
                 break
             }
-
         }
 
+        //if action is up(and it was the last pointer) pointerCount = 1
         if (lastPointersCount != pointerCount) {
             areYouAlone = false
-            if(!isTimerSuccessEnded) startScheduleToRandom(pointerCount)
-            if(lastPointersCount<pointerCount ) {MultiTouchActivity.currentTouches++
-            Log.d("TOUCHES", "${MultiTouchActivity.currentTouches}")}
+            lastPointersCount = pointerCount
+            if (!isTimerSuccessEnded) {
+                startScheduleToRandom(pointerCount)
+            }
+            if (lastPointersCount < pointerCount) {
+                MultiTouchActivity.currentTouches++
+            }
+            if (coordinates.size == 0 && mode == "1") {
+                val winnerIndex = generateIndexRandomPointer()
+                winnerID = event.getPointerId(winnerIndex)
+                coordinates.add(Pointer(event.getX(winnerIndex), event.getY(winnerIndex), winnerID, 0))
+            }
         }
-
-        lastPointersCount = pointerCount
 
         this.invalidate()
 
@@ -144,43 +188,55 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
         return true
     }
 
-    private fun startScheduleToRandom(countTouches: Int) {
+    private fun startScheduleToRandom(countPointer: Int) {
         checkAndStopScheduleAndTextTimer()
-        if (countTouches == 1) {
-            future = scheduledService.schedule(
+        if (countPointer == 1) {
+            futureTask = scheduledService.schedule(
                 {
                     areYouAlone = true
+                    this.invalidate()
                 },
-                2000,
+                milliSecondsForOne,
                 TimeUnit.MILLISECONDS
             )
         } else {
-            val milliSeconds:Long = 1200
-            future = scheduledService.schedule(
+            futureTask = scheduledService.schedule(
                 {
+                    when (mode) {
+                        "1" -> {
+                            winnerID = coordinates[generateIndexRandomPointer()].id
+                            val c = (coordinates.filter { it.id == winnerID } as ArrayList<Pointer>)
+                            coordinates = ArrayList(c)
+                        }
+                        "123" -> {
+                            val queue = generateRandomQueue()
+                            coordinates.forEach { it.placeInLine = queue[coordinates.indexOf(it)] }
+                        }
+                    }
+
                     isTimerSuccessEnded = true
-                    winnerIndex = getOneRandomPointer()
+                    this.invalidate()
                 },
-                milliSeconds,
+                milliSecondsForTimer,
                 TimeUnit.MILLISECONDS
             )
-            startTextTimer(milliSeconds)
+            startTextTimer(milliSecondsForTimer)
         }
     }
 
-    private fun isScheduleNotDone(): Boolean = future != null && !future!!.isDone
+    private fun isScheduleNotDone(): Boolean = futureTask != null && !futureTask!!.isDone
 
     private fun checkAndStopScheduleAndTextTimer() {
 
         if (isScheduleNotDone()) {
-            future!!.cancel(false)
+            futureTask!!.cancel(false)
             textTimer?.cancel()
         }
     }
 
-    private fun startTextTimer(milliSeconds:Long) {
-        textTimer = CustomCountDownTimer(
-            milliSeconds, 10, activity.findViewById(R.id.helpTextView), width
+    private fun startTextTimer(milliSeconds: Long) {
+        textTimer = CustomCountDownTimer(mode,
+            milliSeconds, 10, activity.findViewById(R.id.helpTextView), width, context
         )
             .start() as CustomCountDownTimer
     }
@@ -188,32 +244,41 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
     private fun drawHelpText() {
         val helpTextView = activity.findViewById<TextView>(R.id.helpTextView)
         if (lastPointersCount == 0 || (lastPointersCount == 1 && !areYouAlone)) {
-            helpTextView.textSize = width / 54f
+            helpTextView.textSize = width / 50f
             var helpText = resources.getString(R.string.helpText)
-            helpText = helpText.substring(0, helpText.length-1) + " "
-            when (MultiTouchActivity.mode) {
+            helpText = helpText.substring(0, helpText.length - 1) + " "
+            when (mode) {
                 "1" -> {
-                    helpTextView.text = if(isTimerSuccessEnded) resources.getString(R.string.helpStartAgain)
-                    else (helpText + resources.getString(R.string.helpWhoIsFirst).toLowerCase(Locale.getDefault()))
+                    helpTextView.text =
+                        if (isTimerSuccessEnded) resources.getString(R.string.helpStartAgain)
+                        else (helpText + context.resources.getString(R.string.helpWhoIsFirst).toLowerCase(
+                            Locale.getDefault()
+                        ))
                 }
-                "123" -> helpTextView.text = (helpText + resources.getString(R.string.helpQueue).toLowerCase(Locale.getDefault()))
+                "123" -> helpTextView.text =
+                    (helpText + resources.getString(R.string.helpQueue).toLowerCase(Locale.getDefault()))
             }
         } else if (lastPointersCount == 1 && areYouAlone) {
-            helpTextView.textSize = width / 54f
+            helpTextView.textSize = width / 50f
             helpTextView.text = resources.getString(R.string.youAreOnlyTheFirst)
         }
-
     }
 
-    private fun getOneRandomPointer(): Int = (0 until lastPointersCount).random()
+    private fun generateIndexRandomPointer(): Int = (0 until lastPointersCount).random()
+
+    private fun generateRandomQueue(): MutableList<Int>{
+        val indexRandomQueue = MutableList(lastPointersCount) { i -> i}
+        indexRandomQueue.shuffle()
+        indexRandomQueue.shuffle()
+        indexRandomQueue.shuffle()
+        return indexRandomQueue
+    }
 
     private fun ahShitHereWeGoAgain() {
         colors.shuffle()
-        winnerIndex = -1
-        winnerID = -1
         isTimerSuccessEnded = false
         areYouAlone = false
-        lastPointersCount--
+        lastPointersCount=0
         checkAndStopScheduleAndTextTimer()
         try {
             coordinates.removeAt(0)

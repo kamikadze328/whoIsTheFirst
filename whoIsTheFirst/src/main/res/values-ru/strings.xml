@@ -12,4 +12,6 @@
     <string name="or">или</string>
     <string name="helpText">Одновременно прикоснитесь к экрану и приложение:</string>
     <string name="queueIsNotAvailable">Очередь ещё в разработке</string>
+    <string name="youWin">Вы выйграли!</string>
+    <string name="helpStartAgainQueue">Double tap to start again</string>
 </resources>

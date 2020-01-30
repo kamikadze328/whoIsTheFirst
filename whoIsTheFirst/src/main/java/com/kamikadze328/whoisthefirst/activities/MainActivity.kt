@@ -46,9 +46,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startQueue(view: View) {
-        /*val intent = Intent(this, MultiTouchActivity::class.java)
+        val intent = Intent(this, MultiTouchActivity::class.java)
         intent.putExtra("mode", extrasSequence)
-        startActivityForResult(intent, resultRequest)*/
+        startActivityForResult(intent, resultRequest)
         val toast = Toast.makeText(
             applicationContext,
             resources.getString(R.string.queueIsNotAvailable), Toast.LENGTH_SHORT
