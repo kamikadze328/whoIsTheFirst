@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.kamikadze328.whoisthefirst.R
+import com.kamikadze328.whoisthefirst.views.MultiTouchCustomView
 import kotlinx.android.synthetic.main.activity_multi_touch.*
 
 
@@ -42,9 +44,23 @@ class MultiTouchActivity:Activity(){
         val output = Intent()
         output.putExtra(MainActivity.currentTouchesKey, currentTouches)
         output.putExtra(MainActivity.currentAttemptKey, currentAttempt+1)
-
+        customView.ahShitHereWeGoAgain()
         setResult(RESULT_OK, output)
         finish()
         super.onBackPressed()
     }
+
+    fun onBackPressed(view: View){
+
+        backButton.isEnabled = false
+        backButton.visibility = View.INVISIBLE
+        onBackPressed()
+    }
+
+    fun addBackButton(){
+        backButton.isEnabled = true
+        backButton.visibility = View.VISIBLE
+    }
+
+
 }

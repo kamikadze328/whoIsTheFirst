@@ -27,11 +27,26 @@
         android:gravity="center"
         android:paddingStart="40dp"
         android:paddingEnd="40dp"
-        android:textSize="20sp"
         android:text=""
         android:textColor="@android:color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="7dp"
+        android:enabled="false"
+        android:onClick="onBackPressed"
+        android:visibility="invisible"
+        android:src="@drawable/ic_navigate_before_black_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/transparent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

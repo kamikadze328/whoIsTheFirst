@@ -5,6 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorBackgroundForText">#2e2e2e</color>
     <color name="colorDarkPurple">#1f1a24</color>
+    <color name="transparent">#00000000</color>
 
     <color name="colorButton">#8863BB</color>
 
@@ -21,5 +22,6 @@
     <color name="colorCircleYellow">#e6fc00</color>
     <color name="colorCircleOrange">#ff8300</color>
     <color name="colorCircleWhite">#ffffff</color>
+
 
 </resources>

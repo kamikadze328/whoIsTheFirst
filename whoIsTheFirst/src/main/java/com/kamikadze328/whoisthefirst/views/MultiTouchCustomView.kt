@@ -67,7 +67,6 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
         val gestureDetector = GestureDetector(activity, object : GestureDetector.SimpleOnGestureListener() {
             override fun onDoubleTap(e: MotionEvent?): Boolean {
                 return if(isTimerSuccessEnded && mode=="123"){
-                    Log.d("KEk","$e.action")
                     ahShitHereWeGoAgain()
                     true
                 } else false
@@ -88,13 +87,14 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        radiusCircle = width / 7.7f
+        radiusCircle = (height / 2) / 7.7f
     }
 
     private fun drawTouches(
         canvas: Canvas,
         coordinates: MutableList<Pointer>
     ) {
+
         canvas.drawColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
         if (!isTimerSuccessEnded || mode == "1") coordinates.forEach { drawCircle(canvas, it.x, it.y, it.id) }
         else coordinates.forEach { drawOneFromQueue(canvas, it) }
@@ -118,27 +118,33 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
 
         drawCircle(canvas, x, y, current.id)
 
-        //A Number in a Circle
+        //paint.color = colors[current.id % colors.size]
+
         paint.strokeWidth = width / 150f
-        paint.textSize = width / 15f
+        paint.textSize = width / 20f
         val vOffset = - width / 50f
 
-        val path = Path()
-        path.addCircle(x, y, radiusCircle, Path.Direction.CW)
         paint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
         paint.style = Paint.Style.FILL
         paint.textAlign = Paint.Align.CENTER
         paint.setShadowLayer(0f, 0f, 0f, 0)
 
-        canvas.drawTextOnPath(placeInLine, path, 0f, vOffset, paint)
-        canvas.drawTextOnPath(placeInLine, path, (radiusCircle * 2 * Math.PI.toFloat()) * 1 / 4, vOffset, paint)
-        canvas.drawTextOnPath(placeInLine, path, (radiusCircle * 2 * Math.PI.toFloat()) * 2 / 4, vOffset, paint)
-        canvas.drawTextOnPath(placeInLine, path, (radiusCircle * 2 * Math.PI.toFloat()) * (-1) / 4, vOffset, paint)
-
-
         //Numbers around a Circle
+        val path = Path()
+        path.addCircle(x, y, radiusCircle, Path.Direction.CW)
+        canvas.drawTextOnPath(placeInLine, path, 0f, vOffset, paint)
+
+        canvas.drawTextOnPath(placeInLine, path, (radiusCircle * 2 * Math.PI.toFloat()) * 0 / 7, vOffset, paint)
+        canvas.drawTextOnPath(placeInLine, path, (radiusCircle * 2 * Math.PI.toFloat()) * 1 / 7, vOffset, paint)
+        canvas.drawTextOnPath(placeInLine, path, (radiusCircle * 2 * Math.PI.toFloat()) * 2 / 7, vOffset, paint)
+        canvas.drawTextOnPath(placeInLine, path, (radiusCircle * 2 * Math.PI.toFloat()) * 3 / 7, vOffset, paint)
+        canvas.drawTextOnPath(placeInLine, path, (radiusCircle * 2 * Math.PI.toFloat()) * -1 / 7, vOffset, paint)
+        canvas.drawTextOnPath(placeInLine, path, (radiusCircle * 2 * Math.PI.toFloat()) * -2 / 7, vOffset, paint)
+        canvas.drawTextOnPath(placeInLine, path, (radiusCircle * 2 * Math.PI.toFloat()) * -3 / 7, vOffset, paint)
+
+        //Number inside a circle
         paint.textSize = width / 6f
-        canvas.drawText(placeInLine, x, y+width / 20f, paint)
+        canvas.drawText(placeInLine, x, y+width / 17f, paint)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -164,7 +170,9 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
         //if action is up(and it was the last pointer) pointerCount = 1
         if (lastPointersCount != pointerCount) {
             areYouAlone = false
+
             lastPointersCount = pointerCount
+
             if (!isTimerSuccessEnded) {
                 startScheduleToRandom(pointerCount)
             }
@@ -211,9 +219,9 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
                         "123" -> {
                             val queue = generateRandomQueue()
                             coordinates.forEach { it.placeInLine = queue[coordinates.indexOf(it)] }
+                            activity.runOnUiThread { activity.addBackButton() }
                         }
                     }
-
                     isTimerSuccessEnded = true
                     this.invalidate()
                 },
@@ -235,6 +243,7 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
     }
 
     private fun startTextTimer(milliSeconds: Long) {
+
         textTimer = CustomCountDownTimer(mode,
             milliSeconds, 10, activity.findViewById(R.id.helpTextView), width, context
         )
@@ -274,7 +283,7 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
         return indexRandomQueue
     }
 
-    private fun ahShitHereWeGoAgain() {
+    fun ahShitHereWeGoAgain() {
         colors.shuffle()
         isTimerSuccessEnded = false
         areYouAlone = false

@@ -1,6 +1,7 @@
 package com.kamikadze328.whoisthefirst.auxiliary_classes
 
 import android.content.Context
+
 import android.os.CountDownTimer
 import android.widget.TextView
 import com.kamikadze328.whoisthefirst.R
@@ -25,7 +26,9 @@ class CustomCountDownTimer(
         when(mode){
             "1" -> textView.text = context.resources.getString(R.string.youWin)
             "123" -> {
-                textView.textSize = width / 50f
+                textView.textSize = width / 30f
+
+                //textView.textSize = width / 50f
                 textView.text = context.resources.getString(R.string.helpStartAgainQueue)
             }
         }
