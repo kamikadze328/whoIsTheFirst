@@ -67,7 +67,9 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
         val gestureDetector = GestureDetector(activity, object : GestureDetector.SimpleOnGestureListener() {
             override fun onDoubleTap(e: MotionEvent?): Boolean {
                 return if(isTimerSuccessEnded && mode=="123"){
+                    activity.runOnUiThread { activity.hideBackButton() }
                     ahShitHereWeGoAgain()
+
                     true
                 } else false
             }
@@ -85,16 +87,10 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
         }
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        radiusCircle = (height / 2) / 7.7f
-    }
-
     private fun drawTouches(
         canvas: Canvas,
         coordinates: MutableList<Pointer>
     ) {
-
         canvas.drawColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
         if (!isTimerSuccessEnded || mode == "1") coordinates.forEach { drawCircle(canvas, it.x, it.y, it.id) }
         else coordinates.forEach { drawOneFromQueue(canvas, it) }
@@ -102,19 +98,25 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
 
     private fun drawCircle(canvas: Canvas, x: Float, y:Float, id:Int) {
         val color = colors[id % colors.size]
-
+        radiusCircle = (height / 2) / 7.7f
         paint.color = color
         paint.strokeWidth = width / 50f
         paint.style = Paint.Style.STROKE
         paint.isAntiAlias = true
         paint.setShadowLayer(width / 25f, 0f, 0f, color)
         canvas.drawCircle(x, y, radiusCircle, paint)
+
+        /*paint.style = Paint.Style.FILL
+        paint.setShadowLayer(0f, 0f, 0f, 0)
+        paint.textSize = width / 6f
+        canvas.drawText(id.toString(), x, y+width / 17f, paint)*/
     }
 
     private fun drawOneFromQueue(canvas: Canvas, current: Pointer) {
         val x = current.x
         val y = current.y
         val placeInLine = (current.placeInLine + 1).toString()
+        radiusCircle = (height / 2) / 7.7f
 
         drawCircle(canvas, x, y, current.id)
 
@@ -188,12 +190,13 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet):View(co
 
         this.invalidate()
 
+
+
         // If the last touch pointer is removed -> remove its circle.
-        if (event.action == MotionEvent.ACTION_UP) {
+        return if (event.action == MotionEvent.ACTION_UP) {
             ahShitHereWeGoAgain()
-            return false
-        }
-        return true
+            false
+        } else true
     }
 
     private fun startScheduleToRandom(countPointer: Int) {

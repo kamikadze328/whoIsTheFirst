@@ -8,12 +8,20 @@ android {
     def appName = "WhoIsTheFrst"
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
+    def Properties versionProps = new Properties()
+    def versionPropsFile = file('version.properties')
+    if(versionPropsFile.exists())
+        versionProps.load(new FileInputStream(versionPropsFile))
+    def code = (versionProps['VERSION_CODE'] ?: "0").toInteger() + 1
+    versionProps['VERSION_CODE'] = code.toString()
+    versionProps.store(versionPropsFile.newWriter(), null)
+    def mFileName = ""
     defaultConfig {
         applicationId "com.kamikadze328.whoisthefirst"
         minSdkVersion 22
         targetSdkVersion 29
-        versionCode 34
-        versionName "0.34"
+        versionCode code
+        versionName "0.${code}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -22,12 +30,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             android.applicationVariants.all { variant ->
                 variant.outputs.all {
-                    outputFileName = "${appName}-${variant.versionName}_${variant.name}.apk"
+                    mFileName = "${appName}-v${variant.versionName}_${variant.name}.apk"
+                    outputFileName = mFileName
 
                 }
             }
         }
     }
+
+    /*task copyApkFiles(type: Copy){
+        from 'build/outputs/apk/release'
+        into '../apk'
+        include mFileName
+    }
+    //build.finalizedBy(copyApkFiles)
+    afterEvaluate {
+        assembleRelease.doLast {
+            tasks.copyApkFiles()
+        }
+    }*/
 }
 
 dependencies {

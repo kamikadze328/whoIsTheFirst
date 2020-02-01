@@ -50,16 +50,18 @@ class MultiTouchActivity:Activity(){
         super.onBackPressed()
     }
 
-    fun onBackPressed(view: View){
-
-        backButton.isEnabled = false
-        backButton.visibility = View.INVISIBLE
+    fun onBackPressed(@Suppress("UNUSED_PARAMETER")view: View){
+        hideBackButton()
         onBackPressed()
     }
 
     fun addBackButton(){
         backButton.isEnabled = true
         backButton.visibility = View.VISIBLE
+    }
+    fun hideBackButton(){
+        backButton.isEnabled = false
+        backButton.visibility = View.INVISIBLE
     }
 
 

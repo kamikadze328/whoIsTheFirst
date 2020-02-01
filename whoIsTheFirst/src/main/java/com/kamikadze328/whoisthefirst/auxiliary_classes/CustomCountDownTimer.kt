@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.CountDownTimer
 import android.widget.TextView
 import com.kamikadze328.whoisthefirst.R
+import java.util.*
 import kotlin.math.roundToInt
 
 class CustomCountDownTimer(
@@ -24,11 +25,12 @@ class CustomCountDownTimer(
 
     override fun onFinish() {
         when(mode){
-            "1" -> textView.text = context.resources.getString(R.string.youWin)
+            "1" -> {
+                if(Locale.getDefault().language=="ru") textView.textSize = width / 25f
+                textView.text = context.resources.getString(R.string.youWin)
+            }
             "123" -> {
                 textView.textSize = width / 30f
-
-                //textView.textSize = width / 50f
                 textView.text = context.resources.getString(R.string.helpStartAgainQueue)
             }
         }

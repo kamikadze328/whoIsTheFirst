@@ -2,8 +2,8 @@
     <string name="app_name">Who Is The First?</string>
     <string name="whoIsFirst">Who Is The First</string>
     <string name="queue">Queue</string>
-    <string name="currentAttempt">Current attempt =\u0020</string>
-    <string name="totalAttempt">Current touches =\u0020</string>
+    <string name="currentAttempt">Current attempt =\u0020 &#160;</string>
+    <string name="totalAttempt">Current touches =\u0020 &#160;</string>
     <string name="helpText">All players touch the screen at the same time and wait until the app:</string>
     <string name="helpWhoIsFirst" >Choose one of you</string>
     <string name="helpQueue">Generate a queue</string>
