@@ -6,8 +6,8 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Typeface
+import android.os.Bundle
 import android.util.AttributeSet
-import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -22,7 +22,6 @@ import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
-import kotlin.concurrent.schedule
 
 
 @SuppressLint("ClickableViewAccessibility")
@@ -42,6 +41,8 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
     )
 
     private val activity: MultiTouchActivity = context as MultiTouchActivity
+    private var countTouches = 0
+    var bundle = Bundle()
 
     private var futureTask: ScheduledFuture<*>? = null
     private var textTimer: CustomCountDownTimer? = null
@@ -86,7 +87,6 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
         super.onDraw(canvas)
         if (canvas != null) {
             drawHelpText()
-            Log.v("kek2", "onDraw")
             if (lastPointersCount != 0) {
                 drawTouches(canvas, coordinates)
             }
@@ -149,7 +149,6 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
             hOffset =
                 if (hOffset > circumferenceCircle / 2) (hOffset - circumferenceCircle) else hOffset
 
-            Log.v("kek", hOffset.toString())
             canvas.drawTextOnPath(
                 placeInLine,
                 path,
@@ -169,6 +168,7 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
     override fun onTouchEvent(event: MotionEvent): Boolean {
         super.onTouchEvent(event)
         val pointerCount = event.pointerCount
+
         if (isTimerSuccessEnded && mode == "123") {
             isWaitingRestart = true
         }
@@ -189,7 +189,6 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
             }
         }
 
-
         //if action is up(and it was a last pointer) pointerCount = 1
         @Suppress("DEPRECATION")
         if (isTimerSuccessEnded
@@ -208,14 +207,14 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
         if (lastPointersCount != pointerCount) {
             areYouAlone = false
 
-            lastPointersCount = pointerCount
-
             if (!isTimerSuccessEnded) {
                 startScheduleToRandom(pointerCount)
             }
             if (lastPointersCount < pointerCount) {
-                MultiTouchActivity.currentTouches++
+                (context as? MultiTouchActivity)?.incrementTouchesCount()
             }
+
+            lastPointersCount = pointerCount
         }
 
         this.invalidate()
@@ -250,9 +249,10 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
                         "123" -> {
                             val queue = generateRandomQueue()
                             coordinates.forEach { it.placeInLine = queue[coordinates.indexOf(it)] }
-                            activity.runOnUiThread { activity.addBackButton() }
                         }
                     }
+                    activity.runOnUiThread { activity.addBackButton() }
+                    (context as? MultiTouchActivity)?.incrementAttemptsCount()
                     isTimerSuccessEnded = true
                     this.invalidate()
                 },
@@ -332,7 +332,6 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
         checkAndStopScheduleAndTextTimer()
         coordinates.clear()
     }
-
 }
 
 
