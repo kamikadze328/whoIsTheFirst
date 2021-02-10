@@ -8,9 +8,8 @@
     <string name="helpWhoIsFirst" >Choose one of you</string>
     <string name="helpQueue">Generate a queue</string>
     <string name="youAreOnlyTheFirst">You are the One!</string>
-    <string name="helpStartAgain">Remove the finger from the screen to start again</string>
     <string name="or">or</string>
     <string name="queueIsNotAvailable">Queue is not available now</string>
     <string name="youWin">You win!</string>
-    <string name="helpStartAgainQueue">Double tap to start again</string>
+    <string name="helpStartAgain">Double tap to start again</string>
 </resources>

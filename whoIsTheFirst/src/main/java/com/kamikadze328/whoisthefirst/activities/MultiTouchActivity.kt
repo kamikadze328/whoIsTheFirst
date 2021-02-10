@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.kamikadze328.whoisthefirst.R
-import com.kamikadze328.whoisthefirst.views.MultiTouchCustomView
 import kotlinx.android.synthetic.main.activity_multi_touch.*
 
 
@@ -30,8 +29,8 @@ class MultiTouchActivity:Activity(){
         }
 
         if (savedInstanceState != null) {
-            currentTouches = savedInstanceState.getString(MainActivity.currentTouchesKey) ?.toInt() ?: 0
-            currentAttempt = savedInstanceState.getString(MainActivity.currentAttemptKey) ?.toInt() ?: 0
+            currentTouches = savedInstanceState.getString(MainActivity.CURRENT_TOUCHES_KEY) ?.toInt() ?: 0
+            currentAttempt = savedInstanceState.getString(MainActivity.CURRENT_ATTEMPTS_KEY) ?.toInt() ?: 0
 
         } else {
             currentTouches = localCurrentTouches
@@ -42,8 +41,8 @@ class MultiTouchActivity:Activity(){
 
     override fun onBackPressed() {
         val output = Intent()
-        output.putExtra(MainActivity.currentTouchesKey, currentTouches)
-        output.putExtra(MainActivity.currentAttemptKey, currentAttempt+1)
+        output.putExtra(MainActivity.CURRENT_TOUCHES_KEY, currentTouches)
+        output.putExtra(MainActivity.CURRENT_ATTEMPTS_KEY, currentAttempt+1)
         customView.ahShitHereWeGoAgain()
         setResult(RESULT_OK, output)
         finish()

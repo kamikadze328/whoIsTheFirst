@@ -2,7 +2,6 @@ package com.kamikadze328.whoisthefirst.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,8 +12,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     companion object{
-        const val currentTouchesKey = "current_touches"
-        const val currentAttemptKey = "current_attempt"
+        const val CURRENT_TOUCHES_KEY = "current_touches"
+        const val CURRENT_ATTEMPTS_KEY = "current_attempt"
     }
 
     private val resultRequest = 1
@@ -29,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         // If the last instance was saved then just restore the textViews.
         // Else set the initial value for current and start new thread to get from the db the total max ever.
         if (savedInstanceState != null) {
-            currentTouchesTextView.text = savedInstanceState.getString(currentTouchesKey)
-            currentAttemptTextView.text = savedInstanceState.getString(currentAttemptKey)
+            currentTouchesTextView.text = savedInstanceState.getString(CURRENT_TOUCHES_KEY)
+            currentAttemptTextView.text = savedInstanceState.getString(CURRENT_ATTEMPTS_KEY)
         } else {
             currentAttemptTextView.text = "0"
             currentTouchesTextView.text = "0"
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val resultTouches = data?.getIntExtra(currentTouchesKey, 0) ?:0
+        val resultTouches = data?.getIntExtra(CURRENT_TOUCHES_KEY, 0) ?:0
         if (requestCode == resultRequest) {
             if (resultCode == RESULT_OK) {
                 currentTouchesTextView.text = resultTouches.toString()
@@ -69,8 +68,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putString(currentTouchesKey, currentTouchesTextView.text.toString())
-        outState.putString(currentAttemptKey, currentAttemptTextView.text.toString())
+        outState.putString(CURRENT_TOUCHES_KEY, currentTouchesTextView.text.toString())
+        outState.putString(CURRENT_ATTEMPTS_KEY, currentAttemptTextView.text.toString())
         super.onSaveInstanceState(outState)
     }
 }
