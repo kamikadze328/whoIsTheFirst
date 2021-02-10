@@ -13,4 +13,5 @@
     <string name="queueIsNotAvailable">Очередь ещё в разработке</string>
     <string name="youWin">Вы выиграли!</string>
     <string name="helpStartAgain">Коснитесь дважды, чтобы начать заново</string>
+    <string name="backButton">назад</string>
 </resources>

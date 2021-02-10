@@ -47,6 +47,7 @@
         android:src="@drawable/ic_navigate_before_black_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/transparent"/>
+        android:background="@color/transparent"
+        android:contentDescription="@string/backButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

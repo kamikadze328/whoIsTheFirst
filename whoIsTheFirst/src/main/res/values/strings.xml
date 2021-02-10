@@ -12,4 +12,5 @@
     <string name="queueIsNotAvailable">Queue is not available now</string>
     <string name="youWin">You win!</string>
     <string name="helpStartAgain">Double tap to start again</string>
+    <string name="backButton">back</string>
 </resources>
