@@ -4,9 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
+import android.widget.TextView
 import com.kamikadze328.whoisthefirst.R
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_multi_touch.*
+import com.kamikadze328.whoisthefirst.views.MultiTouchCustomView
 
 
 class MultiTouchActivity:Activity(){
@@ -16,17 +17,20 @@ class MultiTouchActivity:Activity(){
 
     private var touchesCount = 0
     private var attemptsCount = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mode = intent.getStringExtra("mode")?:""
         setContentView(R.layout.activity_multi_touch)
+        val helpTextView: TextView = findViewById(R.id.helpTextView)
         when(mode){
-            "1" -> helpTextView.text = getString(R.string.helpWhoIsFirst)
-            "123" -> helpTextView.text = getString(R.string.helpQueue)
+            MainActivity.extrasWhoIsFirst -> helpTextView.text = getString(R.string.helpWhoIsFirst)
+            MainActivity.extrasSequence -> helpTextView.text = getString(R.string.helpQueue)
         }
         if (savedInstanceState != null) {
             touchesCount = savedInstanceState.getInt(MainActivity.CURRENT_TOUCHES_KEY)
             attemptsCount = savedInstanceState.getInt(MainActivity.CURRENT_ATTEMPTS_KEY)
+
         }
     }
 
@@ -35,15 +39,11 @@ class MultiTouchActivity:Activity(){
         val output = Intent()
         output.putExtra(MainActivity.CURRENT_TOUCHES_KEY, touchesCount)
         output.putExtra(MainActivity.CURRENT_ATTEMPTS_KEY, attemptsCount)
-        customView.ahShitHereWeGoAgain()
+        output.putExtra(MainActivity.MODE_KEY, mode)
+        findViewById<MultiTouchCustomView>(R.id.customView).ahShitHereWeGoAgain()
         setResult(RESULT_OK, output)
         finish()
         super.onBackPressed()
-    }
-
-    override fun onPause() {
-        //MainActivity.saveSta
-        super.onPause()
     }
 
     fun onBackPressed(@Suppress("UNUSED_PARAMETER") view: View){
@@ -52,10 +52,12 @@ class MultiTouchActivity:Activity(){
     }
 
     fun addBackButton(){
+        val backButton: ImageButton = findViewById(R.id.backButton)
         backButton.isEnabled = true
         backButton.visibility = View.VISIBLE
     }
     fun hideBackButton(){
+        val backButton: ImageButton = findViewById(R.id.backButton)
         backButton.isEnabled = false
         backButton.visibility = View.INVISIBLE
     }
@@ -69,6 +71,7 @@ class MultiTouchActivity:Activity(){
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt(MainActivity.CURRENT_TOUCHES_KEY, touchesCount)
         outState.putInt(MainActivity.CURRENT_ATTEMPTS_KEY, attemptsCount)
+
         super.onSaveInstanceState(outState)
     }
 

@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="StatisticsRow">
+        <attr name="key" format="string" />
+    </declare-styleable>
+</resources>

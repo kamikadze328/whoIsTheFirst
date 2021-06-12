@@ -2,10 +2,7 @@ package com.kamikadze328.whoisthefirst.views
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Path
-import android.graphics.Typeface
+import android.graphics.*
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.GestureDetector
@@ -13,6 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import com.kamikadze328.whoisthefirst.R
 import com.kamikadze328.whoisthefirst.activities.MultiTouchActivity
 import com.kamikadze328.whoisthefirst.auxiliary_classes.CustomCountDownTimer
@@ -27,18 +25,7 @@ import kotlin.collections.ArrayList
 @SuppressLint("ClickableViewAccessibility")
 class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
     View(context, attributeSet) {
-    private val colors: MutableList<Int> = mutableListOf(
-        ContextCompat.getColor(context, R.color.colorCircleRed),
-        ContextCompat.getColor(context, R.color.colorCirclePink),
-        ContextCompat.getColor(context, R.color.colorCirclePurple),
-        ContextCompat.getColor(context, R.color.colorCircleBlue),
-        ContextCompat.getColor(context, R.color.colorCircleLightBlue),
-        ContextCompat.getColor(context, R.color.colorCircleMint),
-        ContextCompat.getColor(context, R.color.colorCircleAppleGreen),
-        ContextCompat.getColor(context, R.color.colorCircleYellow),
-        ContextCompat.getColor(context, R.color.colorCircleOrange),
-        ContextCompat.getColor(context, R.color.colorCircleWhite)
-    )
+    private var colors: MutableList<Int> = mutableListOf()
 
     private val activity: MultiTouchActivity = context as MultiTouchActivity
     private var countTouches = 0
@@ -58,7 +45,7 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
     private var winnerID: Int = -1
     private var winnerPoint: Pointer? = null
 
-    private val milliSecondsForTimer: Long = 1000
+    private var milliSecondsForTimer: Long = 1000
     private val milliSecondsForOne: Long = 2500
     private var radiusCircle = 0f
 
@@ -67,6 +54,8 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
     private val mode = MultiTouchActivity.mode
 
     init {
+        milliSecondsForTimer = PreferenceManager.getDefaultSharedPreferences(context).getInt(resources.getString(R.string.timeout_key), milliSecondsForTimer.toInt()).toLong()
+        resources.getIntArray(R.array.circle_colors).forEach { colors.add(it) }
         colors.shuffle()
         colors.shuffle()
         colors.shuffle()

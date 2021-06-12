@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/timeout_header">
+
+        <SeekBarPreference
+            android:key="@string/timeout_key"
+            app:defaultValue="2000"
+            android:max="10000"
+            app:min="1000"
+            android:summary="@string/timeout_summary"
+            app:showSeekBarValue="true"
+            app:title="@string/timeout_title" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

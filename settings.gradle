@@ -1,2 +1,2 @@
 include ':whoIsTheFirst'
-rootProject.name='whoIsFirst'
+rootProject.name='whoIsTheFirst'

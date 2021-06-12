@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Who Is The First?</string>
     <string name="currentAttempt">Сейчас попыток =\u0020 &#160;</string>
-    <string name="helpQueue">Сгенерирует очередь</string>
+    <string name="helpQueue">Создаст очередь</string>
     <string name="helpWhoIsFirst">Случайно выберет одного</string>
     <string name="queue">Очередь</string>
     <string name="totalAttempt">Сейчас касаний =\u0020 &#160;</string>
@@ -14,4 +14,15 @@
     <string name="youWin">Вы выиграли!</string>
     <string name="helpStartAgain">Коснитесь дважды, чтобы начать заново</string>
     <string name="backButton">назад</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="timeout_header">Таймаут</string>
+    <string name="timeout_title">Задержка до выбора одного игрока</string>
+    <string name="timeout_summary">по-умолчанию = 2000</string>
+    <string name="title_activity_statistics">Статистика</string>
+    <string name="number_touches">Касаний</string>
+    <string name="number_attemps">Попыток</string>
+    <string name="number_attemps_the_first">Попыток выбора первого</string>
+    <string name="current">Текущая</string>
+    <string name="total">Всего</string>
+    <string name="number_attemps_queue">Попыток создания очереди</string>
 </resources>

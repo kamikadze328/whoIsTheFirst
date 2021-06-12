@@ -4,19 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".activities.MainActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/queueButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,32 +22,27 @@
 
             <TextView
                 android:id="@+id/helloInitial"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:gravity="center"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="7dp"
                 android:text="@string/helpText"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@color/colorTextOnDark"
                 android:textSize="25sp"
                 android:textStyle="bold"
+                android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:id="@+id/descriptionLayout"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginBottom="18dp"
                 android:background="@drawable/background_for_text"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/helloInitial">
 
@@ -61,7 +54,7 @@
                     android:paddingStart="10dp"
                     android:paddingTop="6dp"
                     android:paddingEnd="10dp"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
                     android:text="@string/helpWhoIsFirst"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/colorText"
@@ -71,10 +64,10 @@
                     android:id="@+id/dividerLayout"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:background="@drawable/background_for_text"
-                    android:orientation="horizontal"
                     android:layout_marginTop="7dp"
                     android:layout_marginBottom="3dp"
+                    android:background="@drawable/background_for_text"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -83,8 +76,8 @@
                     <View
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        android:layout_marginTop="10dp"
                         android:layout_marginStart="13dp"
+                        android:layout_marginTop="10dp"
                         android:layout_weight="0.43"
                         android:background="@android:color/white"
                         android:padding="2dp" />
@@ -94,11 +87,8 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="-6dp"
                         android:layout_weight="0.045"
-                        android:gravity="center"
                         android:includeFontPadding="false"
-                        android:lineSpacingExtra="0dp"
-                        android:lineSpacingMultiplier="0"
-                        android:paddingTop="0dp"
+                        android:gravity="center_horizontal"
                         android:text="@string/or"
                         android:textColor="@color/colorText"
                         android:textSize="24sp" />
@@ -113,7 +103,6 @@
                         android:padding="2dp" />
                 </LinearLayout>
 
-
                 <TextView
                     android:id="@+id/descriptionQueue"
                     android:layout_width="match_parent"
@@ -121,101 +110,53 @@
                     android:layout_weight="1"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
-                    android:gravity="center"
                     android:paddingBottom="6dp"
+                    android:gravity="center_horizontal"
                     android:text="@string/helpQueue"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/colorText"
                     android:textSize="24sp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/currentTouchesMainTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/totalAttempt"
-                android:textColor="@color/colorTextOnDark"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/descriptionLayout" />
-
-            <TextView
-                android:id="@+id/currentTouchesTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/colorTextOnDark"
-                android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@+id/currentTouchesMainTextView"
-                app:layout_constraintTop_toBottomOf="@+id/descriptionLayout" />
-
-            <TextView
-                android:id="@+id/currentAttemptMainTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/currentAttempt"
-                android:textColor="@color/colorTextOnDark"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/currentTouchesMainTextView" />
-
-            <TextView
-                android:id="@+id/currentAttemptTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/colorTextOnDark"
-                android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@+id/currentAttemptMainTextView"
-                app:layout_constraintTop_toBottomOf="@+id/currentTouchesMainTextView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/whoIsFirstButton"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/custom_button"
-        android:drawableEnd="@drawable/icon_who_is_first_button"
-        android:onClick="startWhoIsFirst"
-        android:padding="10dp"
-        android:text="@string/whoIsFirst"
-        android:textAllCaps="false"
-        android:textColor="@color/colorTextOnDark"
-        android:textSize="25sp"
-
-        app:layout_constraintBottom_toTopOf="@+id/queueButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/queueButton"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/custom_button"
-        android:drawableEnd="@drawable/icon_sequence_button_24dp"
-        android:onClick="startQueue"
-        android:padding="10dp"
-        android:text="@string/queue"
-        android:textAllCaps="false"
-        android:textColor="@color/colorTextOnDark"
-        android:textSize="25sp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
+        <Button
+            android:id="@+id/whoIsFirstButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/custom_button"
+            android:drawableEnd="@drawable/icon_who_is_first_button"
+            android:onClick="startWhoIsFirst"
+            android:padding="10dp"
+            android:text="@string/whoIsFirst"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextOnDark"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/queueButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/custom_button"
+            android:drawableEnd="@drawable/icon_sequence_button_24dp"
+            android:onClick="startQueue"
+            android:padding="10dp"
+            android:text="@string/queue"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextOnDark"
+            android:textSize="25sp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,15 @@
+<resources>
+
+    <integer-array name="circle_colors">
+        <item>@color/colorCircleRed</item>
+        <item>@color/colorCircleOrange</item>
+        <item>@color/colorCircleYellow</item>
+        <item>@color/colorCircleAppleGreen</item>
+        <item>@color/colorCircleLightBlue</item>
+        <item>@color/colorCircleBlue</item>
+        <item>@color/colorCirclePurple</item>
+        <item>@color/colorCirclePink</item>
+        <item>@color/colorCircleWhite</item>
+    </integer-array>
+
+</resources>
