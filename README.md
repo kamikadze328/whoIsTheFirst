@@ -1,2 +1,2 @@
-# Who Is First?
+# Who Is The First?
 Kotlin and Android app
