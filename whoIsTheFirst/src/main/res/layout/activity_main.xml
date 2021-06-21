@@ -11,7 +11,7 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,11 +24,11 @@
                 android:id="@+id/helloInitial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:text="@string/helpText"
                 android:textColor="@color/colorTextOnDark"
-                android:textSize="25sp"
+                android:textSize="@dimen/text_description_size"
                 android:textStyle="bold"
-                android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -38,6 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="18dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="18dp"
                 android:background="@drawable/background_for_text"
@@ -51,14 +52,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center_horizontal"
                     android:paddingStart="10dp"
                     android:paddingTop="6dp"
                     android:paddingEnd="10dp"
-                    android:gravity="center_horizontal"
                     android:text="@string/helpWhoIsFirst"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/colorText"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/text_description_one_of_size" />
 
                 <LinearLayout
                     android:id="@+id/dividerLayout"
@@ -87,11 +88,13 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="-6dp"
                         android:layout_weight="0.045"
-                        android:includeFontPadding="false"
                         android:gravity="center_horizontal"
+                        android:includeFontPadding="false"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
                         android:text="@string/or"
                         android:textColor="@color/colorText"
-                        android:textSize="24sp" />
+                        android:textSize="@dimen/text_description_one_of_size" />
 
                     <View
                         android:layout_width="0dp"
@@ -108,20 +111,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center_horizontal"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="6dp"
-                    android:gravity="center_horizontal"
                     android:text="@string/helpQueue"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/colorText"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/text_description_size" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/buttonLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -139,7 +143,6 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/custom_button"
             android:drawableEnd="@drawable/icon_who_is_first_button"
-            android:onClick="startWhoIsFirst"
             android:padding="10dp"
             android:text="@string/whoIsFirst"
             android:textAllCaps="false"
@@ -152,7 +155,6 @@
             android:layout_height="70dp"
             android:background="@drawable/custom_button"
             android:drawableEnd="@drawable/icon_sequence_button_24dp"
-            android:onClick="startQueue"
             android:padding="10dp"
             android:text="@string/queue"
             android:textAllCaps="false"
