@@ -1,2 +1,2 @@
-# Who Is First?
-Kotlin and Android app
+# Who Is The First?
+Android app (Kotlin)
