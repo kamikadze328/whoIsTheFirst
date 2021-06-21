@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
+import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
 import com.kamikadze328.whoisthefirst.R
@@ -46,6 +46,9 @@ class MainActivity : AppCompatActivity() {
         pref.attemptsOneCurrent = 0L
         pref.attemptsQueueCurrent = 0L
 
+        findViewById<Button>(R.id.whoIsFirstButton).setOnClickListener { startWhoIsFirst() }
+        findViewById<Button>(R.id.queueButton).setOnClickListener { startQueue() }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -67,19 +70,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun startWhoIsFirst(@Suppress("UNUSED_PARAMETER") view: View) {
+    private fun startWhoIsFirst() {
         val intent = Intent(this, MultiTouchActivity::class.java)
         intent.putExtra(MODE_KEY, extrasWhoIsFirst)
         resultLauncher.launch(intent)
     }
 
-    fun startQueue(@Suppress("UNUSED_PARAMETER") view: View) {
+    private fun startQueue() {
         val intent = Intent(this, MultiTouchActivity::class.java)
         intent.putExtra(MODE_KEY, extrasSequence)
         resultLauncher.launch(intent)
     }
 
-    private fun updateStatistics(data: Intent?){
+    private fun updateStatistics(data: Intent?) {
         data?.let {
             val resultTouches = it.getIntExtra(CURRENT_TOUCHES_KEY, 0).toLong()
             val resultAttempts = it.getIntExtra(CURRENT_ATTEMPTS_KEY, 0).toLong()
@@ -87,7 +90,7 @@ class MainActivity : AppCompatActivity() {
 
             pref.increaseAllTouches(resultTouches)
             pref.increaseAllAttempts(resultAttempts)
-            when(mode){
+            when (mode) {
                 extrasSequence -> pref.increaseAllAttemptsQueue(resultAttempts)
                 extrasWhoIsFirst -> pref.increaseAllAttemptsOne(resultAttempts)
             }
