@@ -29,4 +29,11 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorAccent</item>
     </style>
+
+
+    <style name="AboutTheme" parent="AppTheme">
+        <item name="android:textColorLink">@color/colorText</item>
+        <item name="android:textSize">@dimen/text_about_size</item>
+        <item name="android:layout_margin">20dp</item>
+    </style>
 </resources>

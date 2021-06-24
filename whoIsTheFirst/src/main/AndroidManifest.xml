@@ -15,12 +15,16 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".activities.SettingsActivity"
-            android:theme="@style/SettingsTheme"
-            android:label="@string/title_activity_settings" />
+            android:label="@string/title_activity_settings"
+            android:theme="@style/SettingsTheme" />
         <activity
             android:name=".activities.StatisticsActivity"
-            android:theme="@style/SettingsTheme"
-            android:label="@string/title_activity_statistics" />
+            android:label="@string/title_activity_statistics"
+            android:theme="@style/SettingsTheme" />
+        <activity
+            android:name=".activities.AboutInfoActivity"
+            android:label="@string/title_activity_about"
+            android:theme="@style/SettingsTheme" />
         <activity
             android:name=".activities.MainActivity"
             android:screenOrientation="portrait">

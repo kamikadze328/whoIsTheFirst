@@ -11,4 +11,8 @@
         android:id="@+id/statisticsButton"
         android:title="@string/title_activity_statistics"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/aboutButton"
+        android:title="@string/title_activity_about"
+        app:showAsAction="never"/>
 </menu>

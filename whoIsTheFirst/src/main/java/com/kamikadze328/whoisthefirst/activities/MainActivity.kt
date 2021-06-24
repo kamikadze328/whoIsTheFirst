@@ -66,6 +66,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this@MainActivity, StatisticsActivity::class.java))
                 return true
             }
+            R.id.aboutButton -> {
+                startActivity(Intent(this@MainActivity, AboutInfoActivity::class.java))
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
