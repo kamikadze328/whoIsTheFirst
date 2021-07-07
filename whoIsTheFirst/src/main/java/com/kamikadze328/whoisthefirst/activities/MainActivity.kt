@@ -8,7 +8,7 @@ import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
 import com.kamikadze328.whoisthefirst.R
-import com.kamikadze328.whoisthefirst.auxiliary_classes.MyPreferencesManager
+import com.kamikadze328.whoisthefirst.auxiliary_classes.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         const val MODE_KEY = "mode"
         const val extrasWhoIsFirst = "1"
         const val extrasSequence = "123"
+
     }
 
     private lateinit var pref: MyPreferencesManager
@@ -31,6 +32,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        checkUpdates(this)
 
         pref = MyPreferencesManager(applicationContext)
 
@@ -48,8 +51,8 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.whoIsFirstButton).setOnClickListener { startWhoIsFirst() }
         findViewById<Button>(R.id.queueButton).setOnClickListener { startQueue() }
-
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
