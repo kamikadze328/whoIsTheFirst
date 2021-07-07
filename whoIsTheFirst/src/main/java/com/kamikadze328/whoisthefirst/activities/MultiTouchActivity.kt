@@ -10,29 +10,33 @@ import com.kamikadze328.whoisthefirst.R
 import com.kamikadze328.whoisthefirst.views.MultiTouchCustomView
 
 
-class MultiTouchActivity:Activity(){
-    companion object{
+class MultiTouchActivity : Activity() {
+    companion object {
         var mode = ""
     }
 
     private var touchesCount = 0
     private var attemptsCount = 0
+    private lateinit var backButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mode = intent.getStringExtra("mode")?:""
+        mode = intent.getStringExtra("mode") ?: ""
         setContentView(R.layout.activity_multi_touch)
         val helpTextView: TextView = findViewById(R.id.helpTextView)
-        when(mode){
+        when (mode) {
             MainActivity.extrasWhoIsFirst -> helpTextView.text = getString(R.string.helpWhoIsFirst)
             MainActivity.extrasSequence -> helpTextView.text = getString(R.string.helpQueue)
         }
         if (savedInstanceState != null) {
             touchesCount = savedInstanceState.getInt(MainActivity.CURRENT_TOUCHES_KEY)
             attemptsCount = savedInstanceState.getInt(MainActivity.CURRENT_ATTEMPTS_KEY)
-
         }
+
+        backButton = findViewById(R.id.backButton)
+        backButton.setOnClickListener { onBackPressed() }
     }
+
 
 
     override fun onBackPressed() {
@@ -46,25 +50,21 @@ class MultiTouchActivity:Activity(){
         super.onBackPressed()
     }
 
-    fun onBackPressed(@Suppress("UNUSED_PARAMETER") view: View){
-        hideBackButton()
-        onBackPressed()
-    }
-
-    fun addBackButton(){
-        val backButton: ImageButton = findViewById(R.id.backButton)
+    fun addBackButton() {
         backButton.isEnabled = true
         backButton.visibility = View.VISIBLE
     }
-    fun hideBackButton(){
-        val backButton: ImageButton = findViewById(R.id.backButton)
+
+    fun hideBackButton() {
         backButton.isEnabled = false
         backButton.visibility = View.INVISIBLE
     }
-    fun incrementTouchesCount(){
+
+    fun incrementTouchesCount() {
         touchesCount++
     }
-    fun incrementAttemptsCount(){
+
+    fun incrementAttemptsCount() {
         attemptsCount++
     }
 

@@ -2,9 +2,12 @@ package com.kamikadze328.whoisthefirst.views
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.*
-import android.os.Bundle
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.Typeface
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -21,20 +24,18 @@ import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
-
+//TODO ClickableViewAccessibility
 @SuppressLint("ClickableViewAccessibility")
 class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
     View(context, attributeSet) {
     private var colors: MutableList<Int> = mutableListOf()
 
     private val activity: MultiTouchActivity = context as MultiTouchActivity
-    private var countTouches = 0
-    var bundle = Bundle()
 
     private var futureTask: ScheduledFuture<*>? = null
     private var textTimer: CustomCountDownTimer? = null
 
-    private var coordinates: ArrayList<Pointer> = ArrayList()
+    private var coordinates: MutableList<Pointer> = mutableListOf()
 
     private val paint: Paint = Paint()
 
@@ -53,8 +54,13 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
 
     private val mode = MultiTouchActivity.mode
 
+
+    private lateinit var helpTextView: TextView
+
     init {
-        milliSecondsForTimer = PreferenceManager.getDefaultSharedPreferences(context).getInt(resources.getString(R.string.timeout_key), milliSecondsForTimer.toInt()).toLong()
+        milliSecondsForTimer = PreferenceManager.getDefaultSharedPreferences(context)
+            .getInt(resources.getString(R.string.timeout_key), milliSecondsForTimer.toInt())
+            .toLong()
         resources.getIntArray(R.array.circle_colors).forEach { colors.add(it) }
         colors.shuffle()
         colors.shuffle()
@@ -70,7 +76,15 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
                 }
             })
         this.setOnTouchListener { _, event -> gestureDetector.onTouchEvent(event) }
+
     }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        helpTextView = activity.findViewById(R.id.helpTextView)
+    }
+
+
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -164,30 +178,30 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
         if (isWaitingRestart) {
             return true
         }
-        coordinates = ArrayList()
+        coordinates.clear()
 
         // For each of the pointers of touches -> Put their coordinates to draw them in onDraw().
         for (i in 0 until pointerCount) {
             if (!isTimerSuccessEnded) {
                 coordinates.add(Pointer(event.getX(i), event.getY(i), event.getPointerId(i), 0))
-            } else if (winnerID != event.getPointerId(i)) continue
-            else {
+            } else if (winnerID == event.getPointerId(i)) {
                 winnerPoint = Pointer(event.getX(i), event.getY(i), winnerID, 0)
                 coordinates.add(Pointer(event.getX(i), event.getY(i), winnerID, 0))
                 break
-            }
+            } else continue
         }
 
         //if action is up(and it was a last pointer) pointerCount = 1
-        @Suppress("DEPRECATION")
         if (isTimerSuccessEnded
             && (coordinates.size == 0
                     || (pointerCount == 1 && event.action == MotionEvent.ACTION_UP)
-                    || (pointerCount == 1 && event.action == MotionEvent.ACTION_POINTER_UP)
+                    /*|| (pointerCount == 1 && event.action == MotionEvent.ACTION_POINTER_UP)
                     || (pointerCount == 1 && event.action == MotionEvent.ACTION_POINTER_1_UP)
                     || (pointerCount == 2 && event.action == MotionEvent.ACTION_POINTER_2_UP)
-                    || (pointerCount == 3 && event.action == MotionEvent.ACTION_POINTER_3_UP))
+                    || (pointerCount == 3 && event.action == MotionEvent.ACTION_POINTER_3_UP)*/)
         ) {
+
+
             /*lastPointersCount = 0*/
             isWaitingRestart = true
             drawHelpText()
@@ -263,12 +277,11 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
     }
 
     private fun startTextTimer() {
-
         textTimer = CustomCountDownTimer(
             mode,
             milliSecondsForTimer,
             10,
-            activity.findViewById(R.id.helpTextView),
+            helpTextView,
             width,
             context
         )
@@ -276,29 +289,42 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
     }
 
     private fun drawHelpText() {
-        val helpTextView = activity.findViewById<TextView>(R.id.helpTextView)
         if (isWaitingRestart) {
+            setDescriptionTextSizeBig()
             helpTextView.text = resources.getString(R.string.helpStartAgain)
-            helpTextView.textSize = width / 30f
         } else if (!isTimerSuccessEnded) {
             if (lastPointersCount == 0 || (lastPointersCount == 1 && !areYouAlone)) {
-                helpTextView.textSize = width / 50f
+                setDescriptionTextSizeNormal()
                 var helpText = resources.getString(R.string.helpText)
                 helpText = helpText.substring(0, helpText.length - 1) + " "
                 when (mode) {
                     "1" -> helpTextView.text =
                         (helpText + context.resources.getString(R.string.helpWhoIsFirst)
-                            .toLowerCase(Locale.getDefault()))
+                            .lowercase(Locale.getDefault()))
 
                     "123" -> helpTextView.text =
                         (helpText + resources.getString(R.string.helpQueue)
-                            .toLowerCase(Locale.getDefault()))
+                            .lowercase(Locale.getDefault()))
                 }
             } else if (lastPointersCount == 1 && areYouAlone) {
-                helpTextView.textSize = width / 50f
+                setDescriptionTextSizeNormal()
                 helpTextView.text = resources.getString(R.string.youAreOnlyTheFirst)
             }
         }
+    }
+
+    private fun setDescriptionTextSizeNormal() {
+        helpTextView.setTextSize(
+            TypedValue.COMPLEX_UNIT_PX,
+            resources.getDimension(R.dimen.text_description_one_of_size)
+        )
+    }
+
+    private fun setDescriptionTextSizeBig() {
+        helpTextView.setTextSize(
+            TypedValue.COMPLEX_UNIT_PX,
+            resources.getDimension(R.dimen.text_description_big_size)
+        )
     }
 
     private fun generateIndexRandomPointer(): Int = (0 until lastPointersCount).random()
