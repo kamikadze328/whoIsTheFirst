@@ -1,3 +1,5 @@
 /build
 /release
+/debug
 /libs
+/agconnect-services.json
