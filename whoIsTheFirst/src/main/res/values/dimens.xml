@@ -3,4 +3,6 @@
     <dimen name="text_description_size">25sp</dimen>
     <dimen name="text_description_one_of_size">24sp</dimen>
     <dimen name="text_about_size">25sp</dimen>
+    <dimen name="text_description_big_size">30sp</dimen>
+
 </resources>

@@ -7,158 +7,100 @@
     android:padding="8dp"
     tools:context=".activities.MainActivity">
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <TextView
+        android:id="@+id/helloInitial"
+        style="@style/MainDescriptionText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:gravity="center_horizontal"
+        android:text="@string/helpText"
+        app:layout_constraintBottom_toTopOf="@+id/descriptionLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/helloInitial"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/helpText"
-                android:textColor="@color/colorTextOnDark"
-                android:textSize="@dimen/text_description_size"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/descriptionLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="18dp"
-                android:background="@drawable/background_for_text"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/helloInitial">
-
-                <TextView
-                    android:id="@+id/descriptionWhoIsFirst"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingStart="10dp"
-                    android:paddingTop="6dp"
-                    android:paddingEnd="10dp"
-                    android:text="@string/helpWhoIsFirst"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/text_description_one_of_size" />
-
-                <LinearLayout
-                    android:id="@+id/dividerLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginBottom="3dp"
-                    android:background="@drawable/background_for_text"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/helloInitial">
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="13dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="0.43"
-                        android:background="@android:color/white"
-                        android:padding="2dp" />
-
-                    <TextView
-                        android:layout_width="36dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="-6dp"
-                        android:layout_weight="0.045"
-                        android:gravity="center_horizontal"
-                        android:includeFontPadding="false"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:text="@string/or"
-                        android:textColor="@color/colorText"
-                        android:textSize="@dimen/text_description_one_of_size" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="13dp"
-                        android:layout_weight="0.43"
-                        android:background="@android:color/white"
-                        android:padding="2dp" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/descriptionQueue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="6dp"
-                    android:text="@string/helpQueue"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/text_description_size" />
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-
-    <LinearLayout
-        android:id="@+id/buttonLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/descriptionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="18dp"
+        android:background="@drawable/background_for_text"
+        android:paddingHorizontal="13dp"
+        android:paddingVertical="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/whoIsFirstButton"
+        app:layout_constraintTop_toBottomOf="@+id/helloInitial">
 
-        <Button
-            android:id="@+id/whoIsFirstButton"
+        <TextView
+            android:id="@+id/descriptionWhoIsFirst"
+            style="@style/OptionDescriptionText"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/custom_button"
-            android:drawableEnd="@drawable/icon_who_is_first_button"
-            android:padding="10dp"
-            android:text="@string/whoIsFirst"
-            android:textAllCaps="false"
-            android:textColor="@color/colorTextOnDark"
-            android:textSize="25sp" />
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/helpWhoIsFirst"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/queueButton"
+        <View
+            android:id="@+id/dividerPartOne"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@id/descriptionQueue"
+            app:layout_constraintEnd_toStartOf="@id/dividerText"
+            app:layout_constraintHorizontal_weight="5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/descriptionWhoIsFirst" />
+
+        <TextView
+            android:id="@+id/dividerText"
+            style="@style/OptionDescriptionText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/or"
+            app:layout_constraintEnd_toStartOf="@id/dividerPartTwo"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/dividerPartOne"
+            app:layout_constraintTop_toBottomOf="@id/descriptionWhoIsFirst" />
+
+        <View
+            android:id="@+id/dividerPartTwo"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@id/descriptionQueue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="5"
+            app:layout_constraintStart_toEndOf="@id/dividerText"
+            app:layout_constraintTop_toBottomOf="@id/descriptionWhoIsFirst" />
+
+        <TextView
+            android:id="@+id/descriptionQueue"
+            style="@style/OptionDescriptionText"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@drawable/custom_button"
-            android:drawableEnd="@drawable/icon_sequence_button_24dp"
-            android:padding="10dp"
-            android:text="@string/queue"
-            android:textAllCaps="false"
-            android:textColor="@color/colorTextOnDark"
-            android:textSize="25sp" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/helpQueue"
+            app:layout_constraintTop_toBottomOf="@id/dividerText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <Button
+        android:id="@+id/whoIsFirstButton"
+        style="@style/MainButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/icon_who_is_first_button_50dp"
+        android:text="@string/whoIsFirst"
+        app:layout_constraintBottom_toTopOf="@id/queueButton" />
+
+    <Button
+        android:id="@+id/queueButton"
+        style="@style/MainButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button"
+        android:drawableEnd="@drawable/icon_sequence_button_50dp"
+        android:text="@string/queue"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
