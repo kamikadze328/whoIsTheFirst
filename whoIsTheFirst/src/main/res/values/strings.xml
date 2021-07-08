@@ -45,8 +45,8 @@
 
     <!-- Preferences -->
     <string name="title_activity_about">About us</string>
-    <string name="app_version">"Version %1$s"</string>
-    <string name="privacy_policy_ref" ><a href="https://kamikadze328.me/whoisthefirst/privacy_policy/index.html">Privacy Policy</a></string>
+    <string name="app_version">"Version %1$s (%2$d/%3$d)"</string>
+    <string name="privacy_policy_ref"><a href="https://kamikadze328.me/whoisthefirst/privacy_policy/index.html">Privacy Policy</a></string>
     <string name="github_ref" translatable="false"><a href="https://github.com/kamikadze328/whoIsTheFirst">Github</a></string>
 
 </resources>

@@ -15,10 +15,15 @@ class AboutInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.about_info_activity)
 
-        findViewById<TextView>(R.id.privacy_policy_ref).movementMethod = LinkMovementMethod.getInstance()
+        findViewById<TextView>(R.id.privacy_policy_ref).movementMethod =
+            LinkMovementMethod.getInstance()
         findViewById<TextView>(R.id.github_ref).movementMethod = LinkMovementMethod.getInstance()
-        findViewById<TextView>(R.id.app_version).text = resources.getString(R.string.app_version, BuildConfig.VERSION_NAME)
-
+        findViewById<TextView>(R.id.app_version).text = resources.getString(
+            R.string.app_version,
+            BuildConfig.VERSION_NAME,
+            BuildConfig.VERSION_CODE,
+            BuildConfig.BUILD_VERSION_CODE
+        )
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

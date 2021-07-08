@@ -11,8 +11,8 @@ android {
     def versionPropsFile = file('version.properties')
     if (versionPropsFile.exists())
         versionProps.load(new FileInputStream(versionPropsFile))
-    def build_version_code = (versionProps['BUILD_VERSION_CODE'] ?: "0")
-    versionProps['BUILD_VERSION_CODE'] = (build_version_code.toInteger() + 1).toString()
+    def build_version_code = ((versionProps['BUILD_VERSION_CODE'] ?: "0").toInteger() + 1).toString()
+    versionProps['BUILD_VERSION_CODE'] = build_version_code
     versionProps.store(versionPropsFile.newWriter(), null)
     def code = (versionProps['VERSION_CODE'] ?: "0").toInteger()
 
@@ -21,7 +21,8 @@ android {
         minSdkVersion 22
         targetSdkVersion 30
         versionCode code
-        versionName "0.${code}"
+        versionName "1.0"
+        buildConfigField 'Integer', 'BUILD_VERSION_CODE', build_version_code
     }
     buildTypes {
         release {
