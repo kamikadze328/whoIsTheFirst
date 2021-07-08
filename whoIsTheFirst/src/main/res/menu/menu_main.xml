@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
     <item
         android:id="@+id/settingsButton"
         android:title="@string/title_activity_settings"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
         android:id="@+id/statisticsButton"
         android:title="@string/title_activity_statistics"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
         android:id="@+id/aboutButton"
         android:title="@string/title_activity_about"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 </menu>

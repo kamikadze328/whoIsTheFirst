@@ -30,7 +30,8 @@ class StatisticsGroup(context: Context, attrs: AttributeSet) : LinearLayout(cont
         touchesView.value = if (isTotal) pref.touchesTotal else pref.touchesCurrent
         attemptsView.value = if (isTotal) pref.attemptsTotal else pref.attemptsCurrent
         attemptsOneView.value = if (isTotal) pref.attemptsOneTotal else pref.attemptsOneCurrent
-        attemptsQueueView.value = if (isTotal) pref.attemptsQueueTotal else pref.attemptsQueueCurrent
+        attemptsQueueView.value =
+            if (isTotal) pref.attemptsQueueTotal else pref.attemptsQueueCurrent
 
         a.recycle()
     }

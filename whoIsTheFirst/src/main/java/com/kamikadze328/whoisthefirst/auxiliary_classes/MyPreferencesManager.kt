@@ -58,38 +58,40 @@ class MyPreferencesManager(val context: Context) {
         get() = pref.getBoolean(context.resources.getString(isFirstTimeId), true)
         set(value) = set(R.string.first_time_run, value)
 
-    private fun set(strId: Int, value: Long){
+    private fun set(strId: Int, value: Long) {
         with(pref.edit()) {
             putLong(context.resources.getString(strId), value)
             apply()
         }
     }
-    private fun set(strId: Int, value: Boolean){
+
+    private fun set(strId: Int, value: Boolean) {
         with(pref.edit()) {
             putBoolean(context.resources.getString(strId), value)
             apply()
         }
     }
+
     private fun get(strId: Int): Long {
         return pref.getLong(context.resources.getString(strId), 0L)
     }
 
-    fun increaseAllTouches(value: Long){
+    fun increaseAllTouches(value: Long) {
         touchesCurrent += value
         touchesTotal += value
     }
 
-    fun increaseAllAttempts(value: Long){
+    fun increaseAllAttempts(value: Long) {
         attemptsCurrent += value
         attemptsTotal += value
     }
 
-    fun increaseAllAttemptsOne(value: Long){
+    fun increaseAllAttemptsOne(value: Long) {
         attemptsOneCurrent += value
         attemptsOneTotal += value
     }
 
-    fun increaseAllAttemptsQueue(value: Long){
+    fun increaseAllAttemptsQueue(value: Long) {
         attemptsQueueCurrent += value
         attemptsQueueTotal += value
     }

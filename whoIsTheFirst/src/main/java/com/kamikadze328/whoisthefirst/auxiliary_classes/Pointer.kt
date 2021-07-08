@@ -4,4 +4,5 @@ class Pointer(
     val x: Float,
     val y: Float,
     val id: Int,
-    var placeInLine: Int)
+    var placeInLine: Int
+)

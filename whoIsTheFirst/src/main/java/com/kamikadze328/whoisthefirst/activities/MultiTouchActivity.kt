@@ -38,7 +38,6 @@ class MultiTouchActivity : Activity() {
     }
 
 
-
     override fun onBackPressed() {
         val output = Intent()
         output.putExtra(MainActivity.CURRENT_TOUCHES_KEY, touchesCount)

@@ -40,12 +40,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginTop="7dp"
-        android:enabled="false"
-        android:visibility="invisible"
-        android:src="@drawable/ic_navigate_before_black_50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:background="@color/transparent"
-        android:contentDescription="@string/backButton" />
+        android:contentDescription="@string/backButton"
+        android:enabled="false"
+        android:src="@drawable/ic_navigate_before_black_50dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

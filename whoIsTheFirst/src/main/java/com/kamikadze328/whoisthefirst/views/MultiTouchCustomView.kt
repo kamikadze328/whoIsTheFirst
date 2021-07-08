@@ -85,7 +85,6 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet) :
     }
 
 
-
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         if (canvas != null) {
