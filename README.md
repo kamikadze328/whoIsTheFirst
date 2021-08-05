@@ -1,4 +1,7 @@
 # Who Is The First?
+### Download:
+- [Google play](https://play.google.com/store/apps/details?id=com.kamikadze328.whoisthefirst)  
+- [AppGalerry](https://appgallery.huawei.com/#/app/C104446711)  
 ## Android app (Kotlin)
   
 ![main menu image](https://github.com/kamikadze328/whoIsTheFirst/blob/master/images/Screenshots/google-play/en_0_main_menu_en.png)
