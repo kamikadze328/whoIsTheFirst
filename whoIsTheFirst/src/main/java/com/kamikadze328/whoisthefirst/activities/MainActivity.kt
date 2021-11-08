@@ -8,7 +8,8 @@ import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
 import com.kamikadze328.whoisthefirst.R
-import com.kamikadze328.whoisthefirst.auxiliary_classes.*
+import com.kamikadze328.whoisthefirst.auxiliary_classes.MyPreferencesManager
+import com.kamikadze328.whoisthefirst.auxiliary_classes.checkUpdates
 
 class MainActivity : AppCompatActivity() {
 
@@ -62,16 +63,16 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.settingsButton -> {
-                startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
-                return true
+                startActivity(Intent(this, SettingsActivity::class.java))
+                true
             }
             R.id.statisticsButton -> {
-                startActivity(Intent(this@MainActivity, StatisticsActivity::class.java))
-                return true
+                startActivity(Intent(this, StatisticsActivity::class.java))
+                true
             }
             R.id.aboutButton -> {
-                startActivity(Intent(this@MainActivity, AboutInfoActivity::class.java))
-                return true
+                startActivity(Intent(this, AboutInfoActivity::class.java))
+                true
             }
             else -> super.onOptionsItemSelected(item)
         }

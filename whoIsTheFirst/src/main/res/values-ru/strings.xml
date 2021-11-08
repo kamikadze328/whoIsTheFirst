@@ -25,7 +25,8 @@
     <string name="current">Текущая</string>
     <string name="total">Всего</string>
     <string name="number_attemps_queue">Попыток создания очереди</string>
+
     <string name="title_activity_about">О нас</string>
     <string name="privacy_policy_ref"><a href="https://kamikadze328.me/whoisthefirst/privacy_policy/index.html">Политика конфиденциальности</a></string>
-    <string name="app_version">Версия %1$s</string>
+    <string name="app_version">Версия %1$s (%2$d/%3$d)</string>
 </resources>

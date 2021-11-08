@@ -51,11 +51,11 @@
 
     <style name="MainButton">
         <item name="android:background">@drawable/custom_button</item>
-        <item name="android:padding">10dp</item>
+        <item name="android:padding">5dp</item>
         <item name="textAllCaps">false</item>
         <item name="android:textColor">@color/colorTextOnDark</item>
         <item name="android:textSize">@dimen/text_about_size</item>
-        <item name="android:layout_margin">8dp</item>
+        <item name="android:layout_margin">10dp</item>
     </style>
 
 </resources>
