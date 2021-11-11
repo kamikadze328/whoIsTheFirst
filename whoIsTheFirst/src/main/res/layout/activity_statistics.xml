@@ -11,11 +11,13 @@
         android:orientation="vertical">
 
         <com.kamikadze328.whoisthefirst.views.StatisticsGroup
+            android:id="@+id/stats_total"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:name="@string/total" />
 
         <com.kamikadze328.whoisthefirst.views.StatisticsGroup
+            android:id="@+id/stats_current"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:name="@string/current" />

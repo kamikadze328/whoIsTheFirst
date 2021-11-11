@@ -17,7 +17,7 @@
     <string name="title_activity_settings">Настройки</string>
     <string name="timeout_header">Таймаут</string>
     <string name="timeout_title">Задержка до выбора одного игрока</string>
-    <string name="timeout_summary">по-умолчанию = 2000</string>
+    <string name="timeout_summary">по-умолчанию = %1$d</string>
     <string name="title_activity_statistics">Статистика</string>
     <string name="number_touches">Касаний</string>
     <string name="number_attemps">Попыток</string>
@@ -29,4 +29,5 @@
     <string name="title_activity_about">О нас</string>
     <string name="privacy_policy_ref"><a href="https://kamikadze328.me/whoisthefirst/privacy_policy/index.html">Политика конфиденциальности</a></string>
     <string name="app_version">Версия %1$s (%2$d/%3$d)</string>
+    <string name="online">Онлайн</string>
 </resources>

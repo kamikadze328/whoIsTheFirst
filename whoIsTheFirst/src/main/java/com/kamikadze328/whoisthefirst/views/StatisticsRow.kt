@@ -15,7 +15,7 @@ class StatisticsRow(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         }
 
     init {
-        inflate(context, R.layout.statistics_row_view, this)
+        inflate(context, R.layout.custom_view_statistics_row, this)
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.StatisticsRow)
 

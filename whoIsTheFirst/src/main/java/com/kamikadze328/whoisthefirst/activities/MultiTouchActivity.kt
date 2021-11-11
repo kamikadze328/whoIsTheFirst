@@ -1,77 +1,154 @@
 package com.kamikadze328.whoisthefirst.activities
 
-import android.app.Activity
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageButton
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.kamikadze328.whoisthefirst.MyApp
 import com.kamikadze328.whoisthefirst.R
+import com.kamikadze328.whoisthefirst.auxiliary_classes.Pointer
+import com.kamikadze328.whoisthefirst.data.Mode
+import com.kamikadze328.whoisthefirst.data.MultiTouchState
+import com.kamikadze328.whoisthefirst.data.TextSize
+import com.kamikadze328.whoisthefirst.data.TouchEventMapper
+import com.kamikadze328.whoisthefirst.presenter.MultiTouchPresenter
+import com.kamikadze328.whoisthefirst.presenter.MultiTouchView
 import com.kamikadze328.whoisthefirst.views.MultiTouchCustomView
+import javax.inject.Inject
 
 
-class MultiTouchActivity : Activity() {
-    companion object {
-        var mode = ""
-    }
+class MultiTouchActivity : AppCompatActivity(R.layout.activity_multi_touch), MultiTouchView {
+    private var mode = Mode.ONE
+    private var state: MultiTouchState = MultiTouchState.DEFAULT
 
-    private var touchesCount = 0
-    private var attemptsCount = 0
-    private lateinit var backButton: ImageButton
+    @Inject
+    lateinit var presenter: MultiTouchPresenter
+
+    @Inject
+    lateinit var touchEventMapper: TouchEventMapper
+
+    private val backButton: ImageButton by lazy { findViewById(R.id.backButton) }
+    private val mainView: MultiTouchCustomView by lazy { findViewById(R.id.multitouchCustomView) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mode = intent.getStringExtra("mode") ?: ""
-        setContentView(R.layout.activity_multi_touch)
-        val helpTextView: TextView = findViewById(R.id.helpTextView)
-        when (mode) {
-            MainActivity.extrasWhoIsFirst -> helpTextView.text = getString(R.string.helpWhoIsFirst)
-            MainActivity.extrasSequence -> helpTextView.text = getString(R.string.helpQueue)
-        }
-        if (savedInstanceState != null) {
-            touchesCount = savedInstanceState.getInt(MainActivity.CURRENT_TOUCHES_KEY)
-            attemptsCount = savedInstanceState.getInt(MainActivity.CURRENT_ATTEMPTS_KEY)
-        }
+        (applicationContext as MyApp).appComponent.injectActivity(this)
+        presenter.view = this
 
-        backButton = findViewById(R.id.backButton)
+        setupMode()
+
+        presenter.ahShitHereWeGoAgain()
+
+        setupOnTouch()
+        addDoubleTapListener()
+        setupBackButton()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setupOnTouch() {
+        val gestureDetector =
+            GestureDetector(mainView.context, object : GestureDetector.SimpleOnGestureListener() {
+                override fun onDoubleTap(e: MotionEvent?): Boolean {
+                    Log.d("kek", "view double tap")
+                    return mainView.notifyAllDoubleTap()
+                }
+            })
+
+        mainView.setOnTouchListener { v, event ->
+            val pointers = touchEventMapper.map(event, v.width, v.height)
+            presenter.newLocalTouchEvent(pointers)
+            gestureDetector.onTouchEvent(event)
+            true
+        }
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.view = null
+    }
+
+    private fun addDoubleTapListener() {
+        mainView.addDoubleTapListener(presenter::tryRestart)
+    }
+
+    private fun setupMode() {
+        mode = intent.getSerializableExtra(MainActivity.MODE_KEY) as Mode
+
+        presenter.mode = mode
+    }
+
+    private fun setupBackButton() {
         backButton.setOnClickListener { onBackPressed() }
     }
 
-
-    override fun onBackPressed() {
-        val output = Intent()
-        output.putExtra(MainActivity.CURRENT_TOUCHES_KEY, touchesCount)
-        output.putExtra(MainActivity.CURRENT_ATTEMPTS_KEY, attemptsCount)
-        output.putExtra(MainActivity.MODE_KEY, mode)
-        findViewById<MultiTouchCustomView>(R.id.customView).ahShitHereWeGoAgain()
-        setResult(RESULT_OK, output)
-        finish()
-        super.onBackPressed()
+    override fun setBackButtonVisibility(isVisible: Boolean) {
+        backButton.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
-    fun addBackButton() {
-        backButton.isEnabled = true
-        backButton.visibility = View.VISIBLE
+    private fun setTextSize(dimenRes: Int) = mainView.setTextSize(dimenRes)
+
+
+    override fun setText(text: String, textSize: TextSize) {
+        mainView.setText(text)
+        setTextSize(textSize.dimenId)
     }
 
-    fun hideBackButton() {
-        backButton.isEnabled = false
-        backButton.visibility = View.INVISIBLE
+
+    override fun drawTouches(pointers: List<Pointer>) {
+        val relativePointers = touchEventMapper.map(pointers, mainView.width, mainView.height)
+        if (state == MultiTouchState.FINISH && mode == Mode.QUEUE)
+            mainView.drawTouchesWithCircles(relativePointers)
+        else
+            mainView.drawTouches(relativePointers)
     }
 
-    fun incrementTouchesCount() {
-        touchesCount++
+    private fun makeDefaultText(dirtyText: String): String {
+        val justText = dirtyText.dropLast(1)
+        val additionalText = when (mode) {
+            Mode.ONE -> getString(R.string.helpWhoIsFirst)
+            Mode.QUEUE -> getString(R.string.helpQueue)
+            else -> ""
+        }.lowercase()
+        return "$justText $additionalText"
     }
 
-    fun incrementAttemptsCount() {
-        attemptsCount++
+    private fun getWinnerText(): String = when (mode) {
+        Mode.ONE -> {
+            getString(R.string.youWin)
+        }
+        Mode.QUEUE -> {
+            getString(R.string.helpStartAgain)
+        }
+        else -> {
+            getString(R.string.youWin)
+        }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(MainActivity.CURRENT_TOUCHES_KEY, touchesCount)
-        outState.putInt(MainActivity.CURRENT_ATTEMPTS_KEY, attemptsCount)
-
-        super.onSaveInstanceState(outState)
+    override fun stateUpdated(state: MultiTouchState) {
+        this.state = state
+        Log.d("kek", "state - $state")
+        when (if (state == MultiTouchState.YOU_ARE_ALONE_TIMER) MultiTouchState.DEFAULT else state) {
+            MultiTouchState.FINISH_BUT_WINNER_POINTER_IS_DOWN -> {
+                val text = getWinnerText()
+                mainView.setText(text, state.textSize)
+            }
+            MultiTouchState.DEFAULT -> {
+                val text = makeDefaultText(getString(state.textRes))
+                mainView.setText(text, state.textSize)
+            }
+            MultiTouchState.TIMER -> {
+                val text = "%.2f".format((state.payload as Long) * 1.0 / 1000)
+                mainView.setText(text, state.textSize)
+            }
+            else -> {
+                mainView.setText(state.textRes, state.textSize)
+            }
+        }
     }
 
 }

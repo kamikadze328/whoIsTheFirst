@@ -86,6 +86,15 @@
 
 
     <Button
+        android:id="@+id/onlineButton"
+        style="@style/MainButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/ic_baseline_wifi_tethering_24"
+        android:text="@string/online"
+        app:layout_constraintBottom_toTopOf="@id/whoIsFirstButton" />
+
+    <Button
         android:id="@+id/whoIsFirstButton"
         style="@style/MainButton"
         android:layout_width="match_parent"

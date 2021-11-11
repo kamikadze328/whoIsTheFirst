@@ -1,6 +1,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Who Is The First?</string>
     <string name="whoIsFirst">Who Is The First</string>
+    <string name="online">Online</string>
     <string name="queue">Queue</string>
     <string name="currentAttempt">Current attempt =\u0020 &#160;</string>
     <string name="totalAttempt">Current touches =\u0020 &#160;</string>
@@ -38,7 +39,7 @@
     <string name="timeout_header">Timeout</string>
     <string name="timeout_key" translatable="false">timeout</string>
     <string name="timeout_title">The timeout before choosing, ms</string>
-    <string name="timeout_summary">default = 2000</string>
+    <string name="timeout_summary">default = %1$d</string>
 
     <string name="first_time_run" translatable="false">first_time_run</string>
 
