@@ -30,4 +30,5 @@
     <string name="privacy_policy_ref"><a href="https://kamikadze328.me/whoisthefirst/privacy_policy/index.html">Политика конфиденциальности</a></string>
     <string name="app_version">Версия %1$s (%2$d/%3$d)</string>
     <string name="online">Онлайн</string>
+    <string name="create_server">Создать сервер</string>
 </resources>

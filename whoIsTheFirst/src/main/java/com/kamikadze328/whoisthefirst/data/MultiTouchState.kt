@@ -1,6 +1,7 @@
 package com.kamikadze328.whoisthefirst.data
 
 import androidx.annotation.DimenRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.kamikadze328.whoisthefirst.R
 
@@ -19,8 +20,11 @@ enum class MultiTouchState(@StringRes val textRes: Int, val textSize: TextSize, 
     TIMER(0, TextSize.BIG, 0L)
 }
 
-enum class Mode {
-    ONE, QUEUE, ONLINE_ONE, ONLINE_QUEUE
+enum class Mode(@DrawableRes val imageId: Int) {
+    ONE(R.drawable.ic_first_50),
+    QUEUE(R.drawable.ic_queue_50),
+    ONLINE_ONE(R.drawable.ic_first_50),
+    ONLINE_QUEUE(R.drawable.ic_queue_50)
 }
 
 const val TIMEOUT_MS_ALONE = 2500L
