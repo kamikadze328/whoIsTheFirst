@@ -1,16 +1,20 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.5.31'
+    ext {
+        kotlin_version = '1.7.0'
+        agconnect_version = '1.7.0.300'
+        hms_version = '6.1.0.301'
+    }
     repositories {
         google()
         mavenCentral()
         maven {url 'https://developer.huawei.com/repo/'}
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.3'
+        classpath 'com.android.tools.build:gradle:7.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.huawei.agconnect:agcp:1.5.1.300'
+        classpath "com.huawei.agconnect:agcp:$agconnect_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

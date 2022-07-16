@@ -105,5 +105,6 @@ fun verifyInstallerId(context: Context): InstallFrom {
 private fun installerStrAPI30(context: Context) =
     context.packageManager.getInstallSourceInfo(context.packageName).installingPackageName
 
+@Suppress("DEPRECATION")
 private fun installerStrAPILess30(context: Context) =
     context.packageManager.getInstallerPackageName(context.packageName)
