@@ -2,11 +2,10 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id  'com.huawei.agconnect'
 }
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     buildToolsVersion '30.0.3'
     Properties versionProps = new Properties()
     def versionPropsFile = file('version.properties')
@@ -20,7 +19,7 @@ android {
     defaultConfig {
         applicationId "com.kamikadze328.whoisthefirst"
         minSdkVersion 22
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode code
         versionName "1.01"
         buildConfigField 'Integer', 'BUILD_VERSION_CODE', build_version_code
@@ -40,6 +39,9 @@ android {
         jvmTarget = '1.8'
     }
 }
+kapt {
+    generateStubs = true
+}
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -48,9 +50,22 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'com.google.android.play:core-ktx:1.8.1'
+    implementation 'com.google.android.play:core:1.10.3'
 
     //huawei service
     implementation "com.huawei.agconnect:agconnect-core:$agconnect_version"
     implementation "com.huawei.hms:appservice:$hms_version"
     implementation "com.huawei.hms:hianalytics:6.6.0.300"
+
+    //google service
+    implementation 'com.google.android.gms:play-services-nearby:18.2.0'
+
+
+    //dagger
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    kapt "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.3.0"
 }
