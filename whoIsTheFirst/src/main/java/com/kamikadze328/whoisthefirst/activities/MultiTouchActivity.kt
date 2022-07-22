@@ -52,7 +52,7 @@ class MultiTouchActivity : AppCompatActivity(R.layout.activity_multi_touch), Mul
     private fun setupOnTouch() {
         val gestureDetector =
             GestureDetector(mainView.context, object : GestureDetector.SimpleOnGestureListener() {
-                override fun onDoubleTap(e: MotionEvent?): Boolean {
+                override fun onDoubleTap(e: MotionEvent): Boolean {
                     Log.d("kek", "view double tap")
                     return mainView.notifyAllDoubleTap()
                 }
