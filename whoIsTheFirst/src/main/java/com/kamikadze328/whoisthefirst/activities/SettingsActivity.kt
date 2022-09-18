@@ -7,12 +7,15 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SeekBarPreference
 import com.kamikadze328.whoisthefirst.R
+import com.kamikadze328.whoisthefirst.repository.SharedPreferencesRepositoryImpl.Companion.TIMEOUT_DEFAULT
+import com.kamikadze328.whoisthefirst.repository.SharedPreferencesRepositoryImpl.Companion.TIMEOUT_MAX
+import com.kamikadze328.whoisthefirst.repository.SharedPreferencesRepositoryImpl.Companion.TIMEOUT_MIN
 
 class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.settings_activity)
+        setContentView(R.layout.activity_settings)
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
@@ -38,13 +41,24 @@ class SettingsActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.preferences, rootKey)
 
-            findPreference<SeekBarPreference>(resources.getString(R.string.timeout_key))?.onPreferenceChangeListener =
-                Preference.OnPreferenceChangeListener { preference, newValue ->
-                    (preference as SeekBarPreference).value =
-                        (newValue as Int / SEEK_BAR_STEP) * SEEK_BAR_STEP
-                    false
+            val timeoutPrefs =
+                findPreference<SeekBarPreference>(resources.getString(R.string.timeout_key))
 
-                }
+            timeoutPrefs?.apply {
+
+                summary = resources.getString(R.string.timeout_summary, TIMEOUT_DEFAULT)
+                //setDefaultValue(TIMEOUT_DEFAULT)
+                min = TIMEOUT_MIN
+                max = TIMEOUT_MAX
+
+                onPreferenceChangeListener =
+                    Preference.OnPreferenceChangeListener { preference, newValue ->
+                        (preference as SeekBarPreference).value =
+                            (newValue as Int / SEEK_BAR_STEP) * SEEK_BAR_STEP
+                        false
+
+                    }
+            }
         }
     }
 

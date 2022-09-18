@@ -13,7 +13,7 @@ class AboutInfoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.about_info_activity)
+        setContentView(R.layout.activity_about_info)
 
         findViewById<TextView>(R.id.privacy_policy_ref).movementMethod =
             LinkMovementMethod.getInstance()

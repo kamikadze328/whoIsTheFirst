@@ -3,6 +3,6 @@
     <dimen name="text_description_size">28sp</dimen>
     <dimen name="text_description_one_of_size">27sp</dimen>
     <dimen name="text_about_size">28sp</dimen>
-    <dimen name="text_description_big_size">33sp</dimen>
+    <dimen name="text_description_big_size">63sp</dimen>
 
 </resources>

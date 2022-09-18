@@ -2,7 +2,8 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.7.0'
+        kotlin_version = '1.7.10'
+        dagger_version = '2.42'
         agconnect_version = '1.7.0.300'
         hms_version = '6.1.0.301'
     }

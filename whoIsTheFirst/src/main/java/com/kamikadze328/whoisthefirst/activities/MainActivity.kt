@@ -5,50 +5,30 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
+import com.kamikadze328.whoisthefirst.MyApp
 import com.kamikadze328.whoisthefirst.R
-import com.kamikadze328.whoisthefirst.auxiliary_classes.MyPreferencesManager
 import com.kamikadze328.whoisthefirst.auxiliary_classes.checkUpdates
+import com.kamikadze328.whoisthefirst.data.Mode
+import com.kamikadze328.whoisthefirst.repository.SharedPreferencesRepository
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     companion object {
-        const val CURRENT_TOUCHES_KEY = "current_touches"
-        const val CURRENT_ATTEMPTS_KEY = "current_attempt"
         const val MODE_KEY = "mode"
-        const val extrasWhoIsFirst = "1"
-        const val extrasSequence = "123"
-
     }
 
-    private lateinit var pref: MyPreferencesManager
-
-    private var resultLauncher = registerForActivityResult(StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            updateStatistics(result.data)
-        }
-    }
+    @Inject
+    lateinit var pref: SharedPreferencesRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        (applicationContext as MyApp).appComponent.injectActivity(this)
 
         checkUpdates(this)
 
-        pref = MyPreferencesManager(applicationContext)
-
-        if (pref.isFirstTime) {
-            pref.touchesTotal = 0L
-            pref.attemptsTotal = 0L
-            pref.attemptsOneTotal = 0L
-            pref.attemptsQueueTotal = 0L
-            pref.isFirstTime = false
-        }
-        pref.touchesCurrent = 0L
-        pref.attemptsCurrent = 0L
-        pref.attemptsOneCurrent = 0L
-        pref.attemptsQueueCurrent = 0L
+        pref.onStartUp()
 
         findViewById<Button>(R.id.whoIsFirstButton).setOnClickListener { startWhoIsFirst() }
         findViewById<Button>(R.id.queueButton).setOnClickListener { startQueue() }
@@ -79,30 +59,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startWhoIsFirst() {
-        val intent = Intent(this, MultiTouchActivity::class.java)
-        intent.putExtra(MODE_KEY, extrasWhoIsFirst)
-        resultLauncher.launch(intent)
+        Intent(this, MultiTouchActivity::class.java).apply {
+            putExtra(MODE_KEY, Mode.ONE)
+            startActivity(this)
+        }
     }
 
     private fun startQueue() {
-        val intent = Intent(this, MultiTouchActivity::class.java)
-        intent.putExtra(MODE_KEY, extrasSequence)
-        resultLauncher.launch(intent)
-    }
-
-    private fun updateStatistics(data: Intent?) {
-        data?.let {
-            val resultTouches = it.getIntExtra(CURRENT_TOUCHES_KEY, 0).toLong()
-            val resultAttempts = it.getIntExtra(CURRENT_ATTEMPTS_KEY, 0).toLong()
-            val mode = it.getStringExtra(MODE_KEY)
-
-            pref.increaseAllTouches(resultTouches)
-            pref.increaseAllAttempts(resultAttempts)
-            when (mode) {
-                extrasSequence -> pref.increaseAllAttemptsQueue(resultAttempts)
-                extrasWhoIsFirst -> pref.increaseAllAttemptsOne(resultAttempts)
-            }
+        Intent(this, MultiTouchActivity::class.java).apply {
+            putExtra(MODE_KEY, Mode.QUEUE)
+            startActivity(this)
         }
-
     }
 }

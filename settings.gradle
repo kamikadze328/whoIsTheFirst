@@ -1,2 +1,9 @@
 include ':whoIsTheFirst'
 rootProject.name='whoIsTheFirst'
+dependencyResolutionManagement {
+
+    repositories {
+        google()
+        maven {url'https : //developer.huawei.com/repo/ ' }
+    }
+}
