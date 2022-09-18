@@ -8,6 +8,7 @@ import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -157,6 +158,7 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet?) :
             TypedValue.COMPLEX_UNIT_PX,
             resources.getDimension(dimenRes)
         )
+        helpText.gravity = Gravity.CENTER
     }
 
     fun setText(text: String, textSize: TextSize = TextSize.NORMAL) {
