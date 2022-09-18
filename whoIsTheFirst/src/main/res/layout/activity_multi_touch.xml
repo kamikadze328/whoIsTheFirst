@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/multitouchRoot"
     android:background="@color/colorPrimaryDark"
     tools:context=".activities.MultiTouchActivity">
 
@@ -23,13 +24,16 @@
         android:id="@+id/helpTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="35dp"
+        android:gravity="center_horizontal"
+        android:paddingStart="35dp"
+        android:paddingEnd="35dp"
         android:textColor="@android:color/white"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/helpText" />
 
     <ImageButton
         android:id="@+id/backButton"

@@ -2,6 +2,7 @@ package com.kamikadze328.whoisthefirst.activities
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -29,7 +30,7 @@ class SettingsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                this.onBackPressed()
+                onBackPressedDispatcher.addCallback(this) { finish() }.handleOnBackPressed()
                 return true
             }
         }
@@ -37,7 +38,10 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
-        private val SEEK_BAR_STEP = 100
+        companion object {
+            private const val SEEK_BAR_STEP = 100
+        }
+
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.preferences, rootKey)
 

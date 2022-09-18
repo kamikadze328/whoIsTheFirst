@@ -2,8 +2,10 @@ package com.kamikadze328.whoisthefirst.activities
 
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
+import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.kamikadze328.whoisthefirst.BuildConfig
 import com.kamikadze328.whoisthefirst.R
@@ -20,9 +22,7 @@ class AboutInfoActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.github_ref).movementMethod = LinkMovementMethod.getInstance()
         findViewById<TextView>(R.id.app_version).text = resources.getString(
             R.string.app_version,
-            BuildConfig.VERSION_NAME,
-            BuildConfig.VERSION_CODE,
-            BuildConfig.BUILD_VERSION_CODE
+            BuildConfig.VERSION_NAME
         )
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -30,7 +30,7 @@ class AboutInfoActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                this.onBackPressed()
+                onBackPressedDispatcher.addCallback(this) { finish() }.handleOnBackPressed()
                 return true
             }
         }

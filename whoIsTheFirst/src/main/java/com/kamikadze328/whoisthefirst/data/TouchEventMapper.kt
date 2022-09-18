@@ -23,21 +23,20 @@ class TouchEventMapper {
     ): MutableList<Pointer> {
         setViewMetrics(width, height)
         val pointers = mutableListOf<Pointer>()
-        //Log.d("kek", "${e.pointerCount} ${e.action == MotionEvent.ACTION_DOWN}(${e.actionMasked == MotionEvent.ACTION_POINTER_DOWN})/${e.action == MotionEvent.ACTION_UP}(${e.actionMasked == MotionEvent.ACTION_POINTER_UP})/${e.action == MotionEvent.ACTION_CANCEL}  (${e.action}/${e.actionMasked})")
+
         //could be problem with system gesture like three finger up or down.
         //So if user touch screen three fingers at one time action will be MotionEvent.CANCEL
         if (e.pointerCount == 1 && e.action == MotionEvent.ACTION_UP) return pointers
 
-        //Log.d("kek", "${e.pointerCount} ${e.actionMasked == MotionEvent.ACTION_POINTER_UP}/${e.action == MotionEvent.ACTION_UP} ${e.actionMasked} ${e.actionIndex}")
         for (i in 0 until e.pointerCount) {
             val id = e.getPointerId(i)
-            //Log.d("kek", "i - $i; id - $id; index - ${e.findPointerIndex(id)} index - ${e.actionIndex}")
+
             if (e.actionMasked == MotionEvent.ACTION_POINTER_UP && i == e.actionIndex) continue
             val x = e.getX(i) / width
             val y = e.getY(i) / height
             pointers.add(Pointer(x, y, id))
         }
-        //Log.d("kek", "$pointers")
+
         return pointers
     }
 

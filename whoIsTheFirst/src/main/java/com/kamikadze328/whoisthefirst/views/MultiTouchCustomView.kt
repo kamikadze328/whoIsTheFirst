@@ -42,7 +42,6 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet?) :
 
         resources.getIntArray(R.array.circle_colors).forEach { colors.add(it) }
         colors.shuffle()
-        Log.d("kek", "colors - $colors")
     }
 
     private fun init(attrs: AttributeSet?) {
@@ -73,7 +72,6 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet?) :
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        Log.d("kek", "draw - ${pointers.size}")
 
         if (canvas != null) {
             canvas.drawColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
@@ -109,7 +107,6 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet?) :
         paint.style = Paint.Style.STROKE
         paint.isAntiAlias = true
         paint.setShadowLayer(circleShadowRadius, 0f, 0f, color)
-        //Log.d("kek", "draw circle - $color, $circleStrokeWidth, $circleShadowRadius, ($p.x, $p.y)")
 
         canvas.drawCircle(p.x, p.y, circleRadius, paint)
     }
@@ -151,13 +148,6 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet?) :
     }
 
 
-    fun setTextSize(size: TextSize) {
-        helpText.setTextSize(
-            TypedValue.COMPLEX_UNIT_PX,
-            resources.getDimension(size.dimenId)
-        )
-    }
-
     fun setText(resId: Int, textSize: TextSize = TextSize.NORMAL) {
         setText(context.getString(resId), textSize)
     }
@@ -170,7 +160,6 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet?) :
     }
 
     fun setText(text: String, textSize: TextSize = TextSize.NORMAL) {
-        Log.d("kek", "set text - $text")
         helpText.text = text
         setTextSize(textSize.dimenId)
     }

@@ -35,7 +35,6 @@ class MultiTouchPresenter @Inject constructor(
 
 
     fun tryRestart(): Boolean {
-        Log.d("kek", "double tap")
         return if (state == MultiTouchState.FINISH) {
             view?.setBackButtonVisibility(false)
             ahShitHereWeGoAgain()
@@ -136,7 +135,6 @@ class MultiTouchPresenter @Inject constructor(
     }
 
     fun newLocalTouchEvent(pointers: MutableList<Pointer>) {
-        Log.d("kek", "newLocalTouchEvent")
         if (state == MultiTouchState.FINISH) return
 
         val isCountTouchesChanged = checkTouchesCount(pointers)
