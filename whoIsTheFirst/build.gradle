@@ -22,7 +22,7 @@ android {
         minSdkVersion 22
         targetSdkVersion 33
         versionCode code
-        versionName "1.2"
+        versionName "1.21"
         buildConfigField 'Integer', 'BUILD_VERSION_CODE', build_version_code
     }
     buildTypes {
