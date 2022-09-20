@@ -22,6 +22,7 @@ enum class InstallSource(val sourceIds: List<String> = emptyList()) {
 }
 
 fun checkUpdates(activity: Activity) {
+    //checkUpdatesHuawei(activity)
     when (verifyInstallerId(activity)) {
         InstallSource.GOOGLE -> checkUpdatesGooglePlay(activity)
         InstallSource.HUAWEI -> checkUpdatesHuawei(activity)
@@ -86,7 +87,7 @@ fun verifyInstallerId(context: Context): InstallSource {
 }
 
 private fun getInstallerStr(context: Context): String? {
-    return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
         context.packageManager.getInstallSourceInfo(context.packageName).installingPackageName
     } else {
         @Suppress("DEPRECATION") context.packageManager.getInstallerPackageName(context.packageName)

@@ -46,7 +46,7 @@
             android:background="@android:color/white"
             app:layout_constraintBottom_toTopOf="@id/descriptionQueue"
             app:layout_constraintEnd_toStartOf="@id/dividerText"
-            app:layout_constraintHorizontal_weight="5"
+            app:layout_constraintHorizontal_weight="2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/descriptionWhoIsFirst" />
 
@@ -70,7 +70,7 @@
             android:background="@android:color/white"
             app:layout_constraintBottom_toTopOf="@id/descriptionQueue"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="5"
+            app:layout_constraintHorizontal_weight="2"
             app:layout_constraintStart_toEndOf="@id/dividerText"
             app:layout_constraintTop_toBottomOf="@id/descriptionWhoIsFirst" />
 
