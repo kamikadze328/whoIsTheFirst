@@ -70,14 +70,12 @@ class MultiTouchCustomView(context: Context, attributeSet: AttributeSet?) :
         numberSizeInsideCircle = width / 6f
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        if (canvas != null) {
-            canvas.drawColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
-            drawTouches(canvas)
+        canvas.drawColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
+        drawTouches(canvas)
 
-        }
     }
 
     fun drawTouches(pointers: List<Pointer>) {
