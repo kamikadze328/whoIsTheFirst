@@ -46,14 +46,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 startActivity(Intent(this, SettingsActivity::class.java))
                 true
             }
+
             R.id.statisticsButton -> {
                 startActivity(Intent(this, StatisticsActivity::class.java))
                 true
             }
+
             R.id.aboutButton -> {
                 startActivity(Intent(this, AboutInfoActivity::class.java))
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

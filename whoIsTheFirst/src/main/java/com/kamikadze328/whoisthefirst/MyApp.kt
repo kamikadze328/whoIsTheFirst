@@ -21,7 +21,6 @@ class MyApp : Application() {
         appComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
         instanse = this
         //appComponent.inject(this)
-
     }
 
 }

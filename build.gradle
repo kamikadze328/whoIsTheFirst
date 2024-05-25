@@ -2,9 +2,9 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.9.10'
-        dagger_version = '2.48'
-        agconnect_version = '1.9.1.301'
+        kotlin_version = '2.0.0'
+        dagger_version = '2.51.1'
+        agconnect_version = '1.9.1.303'
     }
     repositories {
         google()
@@ -12,7 +12,7 @@ buildscript {
         maven {url 'https://developer.huawei.com/repo/'}
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.0.2'
+        classpath 'com.android.tools.build:gradle:8.4.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.huawei.agconnect:agcp:$agconnect_version"
         // NOTE: Do not place your application dependencies here; they belong
@@ -26,8 +26,4 @@ allprojects {
         mavenCentral()
         maven {url 'https://developer.huawei.com/repo/'}
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }

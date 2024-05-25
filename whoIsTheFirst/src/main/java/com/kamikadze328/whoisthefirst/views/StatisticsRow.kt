@@ -25,7 +25,7 @@ class StatisticsRow(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         a.recycle()
     }
 
-    fun reDraw() {
+    private fun reDraw() {
         findViewById<TextView>(R.id.statisticsRowValue).text = value.toString()
     }
 }
