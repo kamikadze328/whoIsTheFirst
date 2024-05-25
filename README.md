@@ -1,4 +1,12 @@
 # Who Is The First?
+
+The application has unlimited capabilities to help you with:  
+- Who will pay at the café?
+- Who will go first in the board game?
+- Who if not me?
+  
+All what you need is touch the screen and the application will choose everything for you!  
+
 ### Download:
 - [Google play](https://play.google.com/store/apps/details?id=com.kamikadze328.whoisthefirst)  
 - [AppGalerry](https://appgallery.huawei.com/#/app/C104446711)  
