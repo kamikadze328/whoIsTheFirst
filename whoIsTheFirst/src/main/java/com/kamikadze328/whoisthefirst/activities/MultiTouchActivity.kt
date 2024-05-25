@@ -1,10 +1,7 @@
 package com.kamikadze328.whoisthefirst.activities
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -23,7 +20,6 @@ import com.kamikadze328.whoisthefirst.data.TouchEventMapper
 import com.kamikadze328.whoisthefirst.presenter.MultiTouchPresenter
 import com.kamikadze328.whoisthefirst.presenter.MultiTouchView
 import com.kamikadze328.whoisthefirst.views.MultiTouchCustomView
-import java.io.Serializable
 import javax.inject.Inject
 
 
@@ -138,9 +134,11 @@ class MultiTouchActivity : AppCompatActivity(R.layout.activity_multi_touch), Mul
         Mode.ONE -> {
             getString(R.string.youWin)
         }
+
         Mode.QUEUE -> {
             getString(R.string.helpStartAgain)
         }
+
         else -> {
             getString(R.string.youWin)
         }
@@ -153,14 +151,17 @@ class MultiTouchActivity : AppCompatActivity(R.layout.activity_multi_touch), Mul
                 val text = getWinnerText()
                 mainView.setText(text, state.textSize)
             }
+
             MultiTouchState.DEFAULT -> {
                 val text = makeDefaultText(getString(state.textRes))
                 mainView.setText(text, state.textSize)
             }
+
             MultiTouchState.TIMER -> {
                 val text = "%.2f".format((state.payload as Long) * 1.0 / 1000)
                 mainView.setText(text, state.textSize)
             }
+
             else -> {
                 mainView.setText(state.textRes, state.textSize)
             }

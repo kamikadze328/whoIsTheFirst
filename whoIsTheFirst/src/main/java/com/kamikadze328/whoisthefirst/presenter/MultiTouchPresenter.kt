@@ -1,7 +1,6 @@
 package com.kamikadze328.whoisthefirst.presenter
 
 import android.os.CountDownTimer
-import android.util.Log
 import com.kamikadze328.whoisthefirst.auxiliary_classes.Pointer
 import com.kamikadze328.whoisthefirst.data.Mode
 import com.kamikadze328.whoisthefirst.data.MultiTouchState
@@ -97,12 +96,14 @@ class MultiTouchPresenter @Inject constructor(
                 state = MultiTouchState.FINISH_BUT_WINNER_POINTER_IS_DOWN
                 onFinishButWinnerPointerIsDown(pointers)
             }
+
             Mode.QUEUE -> {
                 val queue = generateRandomQueue(pointers.size)
                 queue.forEachIndexed { index, i -> pointers[i].placeInQueue = index }
                 sharedPrefsRepository.increaseAttemptsQueue()
                 state = MultiTouchState.FINISH
             }
+
             else -> {
             }
         }
@@ -144,12 +145,15 @@ class MultiTouchPresenter @Inject constructor(
                 val isFinish = onFinishButWinnerPointerIsDown(pointers)
                 if (isFinish) return
             }
+
             pointers.size == 1 && state != MultiTouchState.YOU_ARE_ALONE_TIMER && state != MultiTouchState.YOU_ARE_ALONE -> {
                 startAloneTimer()
             }
+
             pointers.size > 1 && isCountTouchesChanged -> {
                 startTimerToRandom()
             }
+
             pointers.size == 0 && state != MultiTouchState.DEFAULT -> {
                 stopTimer()
                 state = MultiTouchState.DEFAULT
