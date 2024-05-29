@@ -9,7 +9,11 @@ All what you need is touch the screen and the application will choose everything
 
 ### Download:
 - [Google play](https://play.google.com/store/apps/details?id=com.kamikadze328.whoisthefirst)  
-- [AppGalerry](https://appgallery.huawei.com/#/app/C104446711)  
+- [AppGalerry](https://appgallery.huawei.com/#/app/C104446711)
+
+### Stack:
+Kotlin, CustomView
+
 ## Android app (Kotlin)
   
 ![main menu image](https://github.com/kamikadze328/whoIsTheFirst/blob/master/images/Screenshots/google-play/en_0_main_menu_en.png)  
