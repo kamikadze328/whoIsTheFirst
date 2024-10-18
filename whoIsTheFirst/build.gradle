@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'com.huawei.agconnect'
 }
 
 android {
@@ -18,10 +17,10 @@ android {
     defaultConfig {
         applicationId "com.kamikadze328.whoisthefirst"
         minSdkVersion 22
-        compileSdk 34
-        targetSdkVersion 34
+        compileSdk 35
+        targetSdkVersion 35
         versionCode code
-        versionName "1.25"
+        versionName "1.26"
     }
     buildTypes {
         release {
@@ -31,11 +30,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17
+        jvmTarget = JavaVersion.VERSION_21
     }
     buildFeatures {
         buildConfig = true
@@ -64,5 +63,5 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
     kapt 'org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.9.0'
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.3"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6"
 }
