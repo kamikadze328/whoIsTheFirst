@@ -1,0 +1,48 @@
+[versions]
+agconnect = "1.9.1.304"
+agp = "8.7.2"
+appcompat = "1.7.0"
+appservice = "6.1.0.301"
+appUpdateKtx = "2.1.0"
+constraintlayout = "2.2.0"
+coreKtx = "1.15.0"
+dagger = "2.52"
+hianalytics = "6.12.0.301"
+kotlin = "2.0.21"
+kotlinxMetadataJvm = "0.9.0"
+ksp = "2.0.21-1.0.27"
+lifecycleRuntimeKtx = "2.8.7"
+preferenceKtx = "1.2.1"
+
+[libraries]
+# Android
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "preferenceKtx" }
+
+# Kotlin
+kotlin-stdlib-jdk7 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", version.ref = "kotlin" }
+kotlinx-metadata-jvm = { module = "org.jetbrains.kotlinx:kotlinx-metadata-jvm", version.ref = "kotlinxMetadataJvm" }
+
+# Google
+app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "appUpdateKtx" }
+
+# Dagger
+dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
+dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "dagger" }
+dagger-android-processor = { module = "com.google.dagger:dagger-android-processor", version.ref = "dagger" }
+dagger-android-support = { module = "com.google.dagger:dagger-android-support", version.ref = "dagger" }
+dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
+
+# Huawei
+agconnect-core = { module = "com.huawei.agconnect:agconnect-core", version.ref = "agconnect" }
+appservice = { module = "com.huawei.hms:appservice", version.ref = "appservice" }
+hianalytics = { module = "com.huawei.hms:hianalytics", version.ref = "hianalytics" }
+huawei-plugin = { module = "com.huawei.agconnect:agcp", version.ref = "agconnect" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-android-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
