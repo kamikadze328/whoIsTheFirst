@@ -7,7 +7,6 @@ import android.view.MotionEvent
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
 import androidx.core.view.isVisible
 import com.kamikadze328.whoisthefirst.MyApp
 import com.kamikadze328.whoisthefirst.R
@@ -49,16 +48,6 @@ class MultiTouchActivity : AppCompatActivity(R.layout.activity_multi_touch), Mul
         setupOnTouch()
         addDoubleTapListener()
         setupBackButton()
-        hideSystemUI()
-    }
-
-    private fun hideSystemUI() {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        //if i hide all system ui, users can think that phone is broken or app is a virus.
-        /*WindowInsetsControllerCompat(window, findViewById(R.id.multitouchRoot)).let { controller ->
-            controller.hide(WindowInsetsCompat.Type.systemBars())
-            controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        }*/
     }
 
     @SuppressLint("ClickableViewAccessibility")
