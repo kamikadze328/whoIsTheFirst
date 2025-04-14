@@ -2,35 +2,34 @@ package com.kamikadze328.whoisthefirst.activities
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SeekBarPreference
 import com.kamikadze328.whoisthefirst.R
+import com.kamikadze328.whoisthefirst.auxiliary_classes.disableEdgeToEdge
 import com.kamikadze328.whoisthefirst.repository.SharedPreferencesRepositoryImpl.Companion.TIMEOUT_DEFAULT
 import com.kamikadze328.whoisthefirst.repository.SharedPreferencesRepositoryImpl.Companion.TIMEOUT_MAX
 import com.kamikadze328.whoisthefirst.repository.SharedPreferencesRepositoryImpl.Companion.TIMEOUT_MIN
 
-class SettingsActivity : AppCompatActivity() {
-
+class SettingsActivity : AppCompatActivity(R.layout.activity_settings) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
         if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.settings, SettingsFragment())
-                .commit()
+            supportFragmentManager.commit {
+                replace(R.id.settings, SettingsFragment())
+            }
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        disableEdgeToEdge()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                onBackPressedDispatcher.addCallback(this) { finish() }.handleOnBackPressed()
+                finish()
                 return true
             }
         }
@@ -51,7 +50,6 @@ class SettingsActivity : AppCompatActivity() {
             timeoutPrefs?.apply {
 
                 summary = resources.getString(R.string.timeout_summary, TIMEOUT_DEFAULT)
-                //setDefaultValue(TIMEOUT_DEFAULT)
                 min = TIMEOUT_MIN
                 max = TIMEOUT_MAX
 
@@ -60,7 +58,6 @@ class SettingsActivity : AppCompatActivity() {
                         (preference as SeekBarPreference).value =
                             (newValue as Int / SEEK_BAR_STEP) * SEEK_BAR_STEP
                         false
-
                     }
             }
         }

@@ -38,24 +38,19 @@ android {
 }
 
 dependencies {
-    implementation(libs.kotlin.stdlib.jdk7)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.preference.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.fragment.ktx)
 
     // Google Service
     implementation(libs.app.update.ktx)
 
     // huawei service
-    implementation(libs.agconnect.core)
     implementation(libs.appservice)
-    implementation(libs.hianalytics)
 
     // dagger
     implementation(libs.dagger)
-    implementation(libs.dagger.android)
     ksp(libs.dagger.compiler)
-    ksp(libs.dagger.android.processor)
 }

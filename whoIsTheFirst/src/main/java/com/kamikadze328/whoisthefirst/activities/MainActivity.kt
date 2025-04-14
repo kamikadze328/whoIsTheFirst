@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kamikadze328.whoisthefirst.MyApp
 import com.kamikadze328.whoisthefirst.R
 import com.kamikadze328.whoisthefirst.auxiliary_classes.checkUpdates
+import com.kamikadze328.whoisthefirst.auxiliary_classes.disableEdgeToEdge
 import com.kamikadze328.whoisthefirst.data.Mode
 import com.kamikadze328.whoisthefirst.repository.SharedPreferencesRepository
 import javax.inject.Inject
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         findViewById<Button>(R.id.whoIsFirstButton).setOnClickListener { startWhoIsFirst() }
         findViewById<Button>(R.id.queueButton).setOnClickListener { startQueue() }
+        disableEdgeToEdge()
     }
 
 

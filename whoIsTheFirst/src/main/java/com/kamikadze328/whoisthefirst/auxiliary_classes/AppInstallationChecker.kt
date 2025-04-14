@@ -6,12 +6,12 @@ import android.content.Intent
 import android.os.Build
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.huawei.hms.jos.AppUpdateClient
 import com.huawei.hms.jos.JosApps
 import com.huawei.updatesdk.service.appmgr.bean.ApkUpgradeInfo
 import com.huawei.updatesdk.service.otaupdate.CheckUpdateCallBack
 import com.huawei.updatesdk.service.otaupdate.UpdateKey
-import com.kamikadze328.whoisthefirst.auxiliary_classes.ActivityUtils.getSerializable
 
 
 enum class InstallSource(val sourceIds: List<String> = emptyList()) {
@@ -22,38 +22,26 @@ enum class InstallSource(val sourceIds: List<String> = emptyList()) {
 }
 
 fun checkUpdates(activity: Activity) {
-    //checkUpdatesHuawei(activity)
     when (verifyInstallerId(activity)) {
         InstallSource.GOOGLE -> checkUpdatesGooglePlay(activity)
         InstallSource.HUAWEI -> checkUpdatesHuawei(activity)
-        else -> {
-        }
+        InstallSource.RU_STORE,
+        InstallSource.UNKNOWN -> Unit
     }
 }
 
 
 fun checkUpdatesGooglePlay(activity: Activity) {
     val appUpdateManager = AppUpdateManagerFactory.create(activity)
-
-    // Returns an intent object that you use to check for an update.
     val appUpdateInfoTask = appUpdateManager.appUpdateInfo
-
-    // Checks that the platform will allow the specified type of update.
     appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
-        if (appUpdateInfo.updateAvailability() == com.google.android.play.core.install.model.UpdateAvailability.UPDATE_AVAILABLE
-            // This example applies an immediate update. To apply a flexible update
-            // instead, pass in AppUpdateType.FLEXIBLE
+        if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
             && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
         ) {
-
             appUpdateManager.startUpdateFlowForResult(
-                // Pass the intent that is returned by 'getAppUpdateInfo()'.
                 appUpdateInfo,
-                // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
                 AppUpdateType.IMMEDIATE,
-                // The current activity making the update request.
                 activity,
-                // Include a request code to later monitor this update request.
                 1
             )
         }
@@ -81,7 +69,7 @@ fun verifyInstallerId(context: Context): InstallSource {
     // The package name of the app that has installed your app
     val installer = getInstallerStr(context)
 
-    return InstallSource.values().firstOrNull {
+    return InstallSource.entries.firstOrNull {
         it.sourceIds.contains(installer)
     } ?: InstallSource.UNKNOWN
 }

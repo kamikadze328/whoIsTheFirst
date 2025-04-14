@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.MenuItem
 import android.widget.TextView
-import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.kamikadze328.whoisthefirst.BuildConfig
 import com.kamikadze328.whoisthefirst.R
+import com.kamikadze328.whoisthefirst.auxiliary_classes.disableEdgeToEdge
 
 
 class AboutInfoActivity : AppCompatActivity() {
@@ -24,12 +24,13 @@ class AboutInfoActivity : AppCompatActivity() {
             BuildConfig.VERSION_NAME
         )
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        disableEdgeToEdge()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                onBackPressedDispatcher.addCallback(this) { finish() }.handleOnBackPressed()
+                finish()
                 return true
             }
         }

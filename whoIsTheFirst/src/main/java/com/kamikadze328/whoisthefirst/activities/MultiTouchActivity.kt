@@ -4,15 +4,15 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
-import android.view.View
 import android.widget.ImageButton
-import androidx.activity.addCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import androidx.core.view.isVisible
 import com.kamikadze328.whoisthefirst.MyApp
 import com.kamikadze328.whoisthefirst.R
-import com.kamikadze328.whoisthefirst.auxiliary_classes.ActivityUtils.getSerializable
 import com.kamikadze328.whoisthefirst.auxiliary_classes.Pointer
+import com.kamikadze328.whoisthefirst.auxiliary_classes.getSerializable
 import com.kamikadze328.whoisthefirst.data.Mode
 import com.kamikadze328.whoisthefirst.data.MultiTouchState
 import com.kamikadze328.whoisthefirst.data.TextSize
@@ -37,6 +37,7 @@ class MultiTouchActivity : AppCompatActivity(R.layout.activity_multi_touch), Mul
     private val mainView: MultiTouchCustomView by lazy { findViewById(R.id.multitouchCustomView) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         (applicationContext as MyApp).appComponent.injectActivity(this)
         presenter.view = this
@@ -49,7 +50,6 @@ class MultiTouchActivity : AppCompatActivity(R.layout.activity_multi_touch), Mul
         addDoubleTapListener()
         setupBackButton()
         hideSystemUI()
-
     }
 
     private fun hideSystemUI() {
@@ -95,12 +95,12 @@ class MultiTouchActivity : AppCompatActivity(R.layout.activity_multi_touch), Mul
 
     private fun setupBackButton() {
         backButton.setOnClickListener {
-            onBackPressedDispatcher.addCallback(this) { finish() }.handleOnBackPressed()
+            finish()
         }
     }
 
     override fun setBackButtonVisibility(isVisible: Boolean) {
-        backButton.visibility = if (isVisible) View.VISIBLE else View.GONE
+        backButton.isVisible = isVisible
     }
 
     private fun setTextSize(dimenRes: Int) = mainView.setTextSize(dimenRes)
