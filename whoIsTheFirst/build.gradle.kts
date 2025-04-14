@@ -12,8 +12,8 @@ android {
         applicationId = "com.kamikadze328.whoisthefirst"
         minSdk = 22
         targetSdk = 35
-        versionCode = 25
-        versionName = "1.26"
+        versionCode = 27
+        versionName = "1.27"
     }
 
     buildTypes {
