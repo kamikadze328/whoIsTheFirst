@@ -1,15 +1,15 @@
 [versions]
-agconnect = "1.9.1.304"
-agp = "8.9.1"
-appcompat = "1.7.0"
+agconnect = "1.9.3.301"
+agp = "8.11.1"
+appcompat = "1.7.1"
 appservice = "6.1.0.301"
 appUpdateKtx = "2.1.0"
 constraintlayout = "2.2.1"
 coreKtx = "1.16.0"
-dagger = "2.56.1"
-fragmentKtx = "1.8.6"
-kotlin = "2.1.20"
-ksp = "2.1.20-1.0.32"
+dagger = "2.57"
+fragmentKtx = "1.8.8"
+kotlin = "2.2.0"
+ksp = "2.2.0-2.0.2"
 preferenceKtx = "1.2.1"
 
 [libraries]
