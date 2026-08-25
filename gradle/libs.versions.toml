@@ -1,15 +1,14 @@
 [versions]
-agconnect = "1.9.3.301"
-agp = "8.11.1"
-appcompat = "1.7.1"
-appservice = "6.1.0.301"
+agconnect = "1.9.6.300"
+agp = "9.3.2"
+appcompat = "1.8.0"
+appservice = "6.16.2.300"
 appUpdateKtx = "2.1.0"
-constraintlayout = "2.2.1"
-coreKtx = "1.16.0"
-dagger = "2.57"
-fragmentKtx = "1.8.8"
-kotlin = "2.2.0"
-ksp = "2.2.0-2.0.2"
+constraintlayout = "2.2.2"
+coreKtx = "1.19.0"
+dagger = "2.60.1"
+fragmentKtx = "1.9.0"
+ksp = "2.3.11"
 preferenceKtx = "1.2.1"
 
 [libraries]
@@ -33,5 +32,4 @@ huawei-plugin = { module = "com.huawei.agconnect:agcp", version.ref = "agconnect
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-android-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

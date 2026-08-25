@@ -26,4 +26,6 @@
     <color name="colorCircleOrange">#ff8300</color>
     <color name="colorCircleWhite">#ffffff</color>
 
+    <color name="colorMenuBackground">#222222</color>
+
 </resources>

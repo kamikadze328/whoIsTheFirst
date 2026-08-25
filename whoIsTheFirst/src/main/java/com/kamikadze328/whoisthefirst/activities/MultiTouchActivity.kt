@@ -4,10 +4,14 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import com.kamikadze328.whoisthefirst.MyApp
 import com.kamikadze328.whoisthefirst.R
 import com.kamikadze328.whoisthefirst.auxiliary_classes.Pointer
@@ -20,7 +24,6 @@ import com.kamikadze328.whoisthefirst.presenter.MultiTouchPresenter
 import com.kamikadze328.whoisthefirst.presenter.MultiTouchView
 import com.kamikadze328.whoisthefirst.views.MultiTouchCustomView
 import javax.inject.Inject
-
 
 class MultiTouchActivity : AppCompatActivity(R.layout.activity_multi_touch), MultiTouchView {
     private var mode = Mode.ONE
@@ -38,6 +41,9 @@ class MultiTouchActivity : AppCompatActivity(R.layout.activity_multi_touch), Mul
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+
+        processCustomEdgeToEdgeMargins()
+
         (applicationContext as MyApp).appComponent.injectActivity(this)
         presenter.view = this
 
@@ -48,6 +54,18 @@ class MultiTouchActivity : AppCompatActivity(R.layout.activity_multi_touch), Mul
         setupOnTouch()
         addDoubleTapListener()
         setupBackButton()
+    }
+
+    private fun processCustomEdgeToEdgeMargins() {
+        ViewCompat.setOnApplyWindowInsetsListener(backButton) { view, windowInsets ->
+            val statusBarInsets = windowInsets.getInsets(WindowInsetsCompat.Type.statusBars())
+
+            view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                topMargin = statusBarInsets.top
+            }
+
+            windowInsets
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

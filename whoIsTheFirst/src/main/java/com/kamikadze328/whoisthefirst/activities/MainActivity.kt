@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.kamikadze328.whoisthefirst.MyApp
 import com.kamikadze328.whoisthefirst.R
@@ -23,11 +24,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     @Inject
     lateinit var pref: SharedPreferencesRepository
 
+    private val updateLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
+            // Для IMMEDIATE update обычно здесь ничего делать не требуется.
+            // Если пользователь отменит обновление, Activity продолжит работу.
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (applicationContext as MyApp).appComponent.injectActivity(this)
 
-        checkUpdates(this)
+        checkUpdates(updateLauncher)
 
         pref.onStartUp()
 
